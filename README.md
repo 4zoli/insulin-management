@@ -1,2 +1,2 @@
 # insulin-management
-Szakdolgozati projektem, Angular frontend  és InterSystems IRIS backend.
+Szakdolgozati projektem, Angular 9 frontend  és InterSystems IRIS backend.
