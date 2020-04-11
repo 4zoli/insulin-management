@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyBP_kNEMmhtsxSEK1BVL7p5yv0yNLAddMU',
+    authDomain: 'insulin-management.firebaseapp.com',
+    databaseURL: 'https://insulin-management.firebaseio.com',
+    projectId: 'insulin-management',
+    storageBucket: 'insulin-management.appspot.com',
+    messagingSenderId: '791974756775',
+    appId: '1:791974756775:web:d3747990bd5b74e214b682',
+    measurementId: 'G-ZRTRFECLXJ'
+  }
 };
 
 /*
