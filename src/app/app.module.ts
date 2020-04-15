@@ -8,7 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './shared/guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularMaterialModule} from './angular-material.module';
 import {MatCardModule} from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
+import {GetPatientBundleComponent} from './components/get-patient-bundle/get-patient-bundle.component';
+import { GetMedicationRequestBundleComponent } from './components/get-medication-request-bundle/get-medication-request-bundle.component';
+import { GetMedicationDispenseBundleComponent } from './components/get-medication-dispense-bundle/get-medication-dispense-bundle.component';
+import { GetMedicationAdministrationBundleComponent } from './components/get-medication-administration-bundle/get-medication-administration-bundle.component';
+
 
 const config = {
   apiKey: 'AIzaSyBP_kNEMmhtsxSEK1BVL7p5yv0yNLAddMU',
@@ -50,7 +55,14 @@ const routes: Routes = [
     MatCardModule,
     HttpClientModule
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    UserProfileComponent,
+    GetPatientBundleComponent,
+    GetMedicationRequestBundleComponent,
+    GetMedicationDispenseBundleComponent,
+    GetMedicationAdministrationBundleComponent
+  ],
   bootstrap: [AppComponent],
   providers: [AuthGuard]
 })

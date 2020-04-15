@@ -1,0 +1,17 @@
+<div *ngFor="let medicationAdministration of appcomponent.medicationAdministrationBundleArray[0].entry">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{medicationAdministration.resource.subject.display + ' - ' + medicationAdministration.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>
+      <mat-card-subtitle>{{'Azonosító: ' + medicationAdministration.resource.id}}</mat-card-subtitle>
+      <mat-card-subtitle>{{'Státusz: ' + medicationAdministration.resource.status}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <table>
+        <tr><td>Időpont: </td><td>{{medicationAdministration.resource.effectivePeriod.end}}</td></tr>
+        <tr><td>Kapcsolódó recept azonosító: </td><td>{{medicationAdministration.resource.prescription.reference}}</td></tr>
+        <tr><td>Felhasznált mennyiség: </td><td>{{medicationAdministration.resource.dosage.text}}</td></tr>
+        <tr><td>Utolsó frissítés: </td><td>{{medicationAdministration.resource.meta.lastUpdated}}</td></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <br>

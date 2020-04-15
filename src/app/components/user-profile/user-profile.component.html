@@ -1,0 +1,41 @@
+<div *ngIf="auth.user$ | async as user; else login">
+  <pre>
+    {{ user | json }}
+    <img src="{{user.photoURL}}" alt="Smiley face" height="42" width="42">
+  </pre>
+  <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
+  <hr>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getPatientBundle('')">Páciens lista megnyitása</button>
+  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.patientBundleArray.length > 0" (click)="appcomponent.patientBundleArray.length = 0">Páciens lista bezárása</button>
+  <app-get-patient-bundle *ngIf="appcomponent.patientBundleArray.length > 0"></app-get-patient-bundle>
+
+  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationRequestBundle()">Recept lista megnyitása</button>
+  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.medicationRequestBundleArray.length > 0" (click)="appcomponent.medicationRequestBundleArray.length = 0">Recept lista bezárása</button>
+  <app-get-medication-request-bundle  *ngIf="appcomponent.medicationRequestBundleArray.length > 0"></app-get-medication-request-bundle>
+
+  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationDispenseBundle()">Recept kiváltások megnyitása</button>
+  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.medicationDispenseBundleArray.length > 0" (click)="appcomponent.medicationDispenseBundleArray.length = 0">Recept kiváltások bezárása</button>
+  <app-get-medication-dispense-bundle *ngIf="appcomponent.medicationDispenseBundleArray.length > 0"></app-get-medication-dispense-bundle>
+
+  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationAdministrationBundle()">Adminisztrációk megnyitása</button>
+  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.medicationAdministrationBundleArray.length > 0" (click)="appcomponent.medicationAdministrationBundleArray.length = 0">Adminisztrációk bezárása</button>
+  <app-get-medication-administration-bundle *ngIf="appcomponent.medicationAdministrationBundleArray.length > 0"></app-get-medication-administration-bundle>
+
+
+</div>
+
+<ng-template #login>
+  <!--<button class="button" (click)="auth.googleSignin()">Bejelentkezés</button>-->
+  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Google authentikáció</mat-card-title>
+      </mat-card-header>
+
+      <form class="example-form">
+        <p></p>
+        <button mat-stroked-button color="accent" class="btn-block" (click)="auth.googleSignin()">Belépés</button>
+      </form>
+    </mat-card>
+  </div>
+</ng-template>

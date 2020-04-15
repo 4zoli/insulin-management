@@ -1,0 +1,18 @@
+<div *ngFor="let medicationDispense of appcomponent.medicationDispenseBundleArray[0].entry">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{medicationDispense.resource.subject.display + ' - ' + medicationDispense.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>
+      <mat-card-subtitle>{{'Státusz: ' + medicationDispense.resource.status}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <table>
+        <tr><td>Páciens azonosító: </td><td>{{medicationDispense.resource.subject.reference}}</td></tr>
+        <tr><td>Felíró orvos: </td><td>{{medicationDispense.resource.performer[0].actor.reference}}</td></tr>
+        <tr><td>Mennyiség: </td><td>{{medicationDispense.resource.quantity.value + ' ' + medicationDispense.resource.quantity.code}}</td></tr>
+        <tr><td>Elegendő idő: </td><td>{{medicationDispense.resource.daysSupply.value + ' ' + medicationDispense.resource.daysSupply.unit}}</td></tr>
+        <tr><td>Adagolás: </td><td>{{medicationDispense.resource.dosageInstruction[0].text}}</td></tr>
+        <tr><td>Készítve: </td><td>{{medicationDispense.resource.whenPrepared}}</td></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <br>
