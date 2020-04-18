@@ -6,6 +6,7 @@
     </mat-card-header>
     <mat-card-content>
       <table>
+        <tr><td>Azonosító: </td><td>{{medicationDispense.resource.id}}</td></tr>
         <tr><td>Páciens azonosító: </td><td>{{medicationDispense.resource.subject.reference}}</td></tr>
         <tr><td>Felíró orvos: </td><td>{{medicationDispense.resource.performer[0].actor.reference}}</td></tr>
         <tr><td>Mennyiség: </td><td>{{medicationDispense.resource.quantity.value + ' ' + medicationDispense.resource.quantity.code}}</td></tr>

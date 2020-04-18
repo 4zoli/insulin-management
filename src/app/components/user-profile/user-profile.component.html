@@ -1,41 +1,63 @@
-<div *ngIf="auth.user$ | async as user; else login">
-  <pre>
+<div>
+  <!--<pre>
     {{ user | json }}
     <img src="{{user.photoURL}}" alt="Smiley face" height="42" width="42">
-  </pre>
-  <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
-  <hr>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getPatientBundle('')">Páciens lista megnyitása</button>
-  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.patientBundleArray.length > 0" (click)="appcomponent.patientBundleArray.length = 0">Páciens lista bezárása</button>
+  </pre>-->
+  <mat-divider></mat-divider>
+  <button mat-stroked-button color="primary" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getPatientBundle()">Páciensek listázása</button>
+  <button mat-stroked-button color="primary" class="btn-block"  class="button" *ngIf="appcomponent.patientBundleArray.length > 0" (click)="appcomponent.patientBundleArray.length = 0">Bezárás</button>
   <app-get-patient-bundle *ngIf="appcomponent.patientBundleArray.length > 0"></app-get-patient-bundle>
 
-  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationRequestBundle()">Recept lista megnyitása</button>
-  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.medicationRequestBundleArray.length > 0" (click)="appcomponent.medicationRequestBundleArray.length = 0">Recept lista bezárása</button>
+  <button mat-stroked-button color="primary" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationRequestBundle()">Receptek listázása</button>
+  <button mat-stroked-button color="primary" class="btn-block"  class="button" *ngIf="appcomponent.medicationRequestBundleArray.length > 0" (click)="appcomponent.medicationRequestBundleArray.length = 0">Bezárás</button>
   <app-get-medication-request-bundle  *ngIf="appcomponent.medicationRequestBundleArray.length > 0"></app-get-medication-request-bundle>
 
-  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationDispenseBundle()">Recept kiváltások megnyitása</button>
-  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.medicationDispenseBundleArray.length > 0" (click)="appcomponent.medicationDispenseBundleArray.length = 0">Recept kiváltások bezárása</button>
+  <button mat-stroked-button color="primary" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationDispenseBundle()">Kiváltott receptek listázása</button>
+  <button mat-stroked-button color="primary" class="btn-block"  class="button" *ngIf="appcomponent.medicationDispenseBundleArray.length > 0" (click)="appcomponent.medicationDispenseBundleArray.length = 0">Bezárás</button>
   <app-get-medication-dispense-bundle *ngIf="appcomponent.medicationDispenseBundleArray.length > 0"></app-get-medication-dispense-bundle>
 
-  <button mat-stroked-button color="accent" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationAdministrationBundle()">Adminisztrációk megnyitása</button>
-  <button mat-stroked-button color="accent" class="btn-block"  class="button" *ngIf="appcomponent.medicationAdministrationBundleArray.length > 0" (click)="appcomponent.medicationAdministrationBundleArray.length = 0">Adminisztrációk bezárása</button>
+  <button mat-stroked-button color="primary" class="btn-block" class="button" *ngIf="isBundleArraysEmpty() == true" (click)="appcomponent.getMedicationAdministrationBundle()">Adminisztrációk listázása</button>
+  <button mat-stroked-button color="primary" class="btn-block"  class="button" *ngIf="appcomponent.medicationAdministrationBundleArray.length > 0" (click)="appcomponent.medicationAdministrationBundleArray.length = 0">Bezárás</button>
   <app-get-medication-administration-bundle *ngIf="appcomponent.medicationAdministrationBundleArray.length > 0"></app-get-medication-administration-bundle>
 
+  <button mat-stroked-button color="primary" class="btn-block" class="button" (click)="showMedicationAdministrationComponent()">Adminisztrálás !</button>
 
+  <form>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)] = 'patientIdForField' placeholder="Páciens azonosító" name="patientIdField" required>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" class="button" (click)="appcomponent.deletePatient([(patientIdForField)])" [disabled]="!patientIdForField">Törlés</button>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)] = 'medicationAdministrationIdForField' placeholder="Adminisztráció azonosító" name="medicationAdministrationIdForField" required>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" class="button"
+            (click)="appcomponent.deleteMedicationAdministration([(medicationAdministrationIdForField)])"
+            [disabled]="!medicationAdministrationIdForField">Törlés</button>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)] = 'medicationRequestIdForField' placeholder="Recept azonosító" name="medicationRequestIdForField" required>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" class="button"
+            (click)="appcomponent.deleteMedicationRequest([(medicationRequestIdForField)])"
+            [disabled]="!medicationRequestIdForField">Törlés</button>
+  </form>
+
+  <form>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)] = 'medicationDispenseIdForField' placeholder="Kiváltott recept azonosító" name="medicationDispenseIdForField" required>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" class="button"
+            (click)="appcomponent.deleteMedicationDispense([(medicationDispenseIdForField)])"
+            [disabled]="!medicationDispenseIdForField">Törlés</button>
+  </form>
 </div>
 
-<ng-template #login>
-  <!--<button class="button" (click)="auth.googleSignin()">Bejelentkezés</button>-->
-  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-    <mat-card class="box">
-      <mat-card-header>
-        <mat-card-title>Google authentikáció</mat-card-title>
-      </mat-card-header>
 
-      <form class="example-form">
-        <p></p>
-        <button mat-stroked-button color="accent" class="btn-block" (click)="auth.googleSignin()">Belépés</button>
-      </form>
-    </mat-card>
-  </div>
-</ng-template>
+
+
+

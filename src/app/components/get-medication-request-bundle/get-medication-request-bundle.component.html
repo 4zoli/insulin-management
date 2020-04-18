@@ -6,6 +6,7 @@
     </mat-card-header>
     <mat-card-content>
       <table>
+        <tr><td>Azonosító: </td><td>{{medicationRequest.resource.id}}</td></tr>
         <tr><td>Jogosult: </td><td>{{medicationRequest.resource.subject.reference}}</td></tr>
         <tr><td>Kiváltás dátuma: </td><td>{{medicationRequest.resource.authoredOn}}</td></tr>
         <tr><td>Felíró: </td><td>{{medicationRequest.resource.requester.agent.reference}}</td></tr>

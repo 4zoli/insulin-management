@@ -4,7 +4,9 @@ import { ApiService } from './shared/services/api/api.service';
 import { PatientBundle} from './models/patient.bundle.model';
 import {MedicationRequestBundle} from './models/medication.request.bundle.model';
 import {MedicationDispenseBundle} from './models/medication.dispense.bundle.model';
-import {MedicationAdministrationBundle} from './models/medication.administration.model';
+import {Patient} from './models/patient.model';
+import {MedicationAdministration} from './models/medication.administration.model';
+import {MedicationAdministrationBundle} from './models/medication.administration.bundle.model';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +19,17 @@ export class AppComponent {
   medicationRequestBundleArray: MedicationRequestBundle[] = [];
   medicationDispenseBundleArray: MedicationDispenseBundle[] = [];
   medicationAdministrationBundleArray: MedicationAdministrationBundle[] = [];
-  constructor(public auth: AuthService, private  api: ApiService) {}
-  getPatientBundle(patientId) {
+  spresp: any = [];
+  postPatientData: Patient;
+  postMedicationAdministrationdata: MedicationAdministration;
+
+  constructor(public auth: AuthService, private  api: ApiService) {
+  }
+
+  getPatientBundle() {
     this.patientBundleArray.length = 0;
     // @ts-ignore
-    this.api.getPatientBundle(patientId)
+    this.api.getPatientBundle()
       .subscribe(response => {
         console.log(response);
         const keys = response.headers.keys();
@@ -73,7 +81,7 @@ export class AppComponent {
   }
 
   getMedicationAdministrationBundle() {
-    this.medicationDispenseBundleArray.length = 0;
+    this.medicationAdministrationBundleArray.length = 0;
     // @ts-ignore
     this.api.getMedicationAdministrationBundle()
       .subscribe(response => {
@@ -90,4 +98,59 @@ export class AppComponent {
       });
   }
 
+  postPatient() {
+    this.api
+      .postPatient(this.postPatientData)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
+
+  postMedicationAdministration(postMedicationAdministrationdata: MedicationAdministration) {
+    this.api
+      .postMedicationAdministration(postMedicationAdministrationdata)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
+
+  updatePatient(id: any) {
+    this.api
+      .updatePatient(id, this.postPatientData)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
+
+  deletePatient(id: any) {
+    this.api
+      .deletePatient(id)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
+
+  deleteMedicationAdministration(id: any) {
+    this.api
+      .deleteMedicationAdministration(id)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
+
+  deleteMedicationRequest(id: any) {
+    this.api
+      .deleteMedicationRequest(id)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
+
+  deleteMedicationDispense(id: any) {
+    this.api
+      .deleteMedicationDispense(id)
+      .subscribe(response => {
+        return this.spresp.push(response);
+      });
+  }
 }

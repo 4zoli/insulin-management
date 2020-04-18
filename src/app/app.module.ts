@@ -9,7 +9,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './shared/guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -22,8 +21,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {GetPatientBundleComponent} from './components/get-patient-bundle/get-patient-bundle.component';
 import { GetMedicationRequestBundleComponent } from './components/get-medication-request-bundle/get-medication-request-bundle.component';
 import { GetMedicationDispenseBundleComponent } from './components/get-medication-dispense-bundle/get-medication-dispense-bundle.component';
+// tslint:disable-next-line:max-line-length
 import { GetMedicationAdministrationBundleComponent } from './components/get-medication-administration-bundle/get-medication-administration-bundle.component';
-
+import {MatMenuModule} from '@angular/material/menu';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
+import {PostMedicationAdministrationComponent} from './components/post-medication-administration/post-medication-administration.component';
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 const config = {
   apiKey: 'AIzaSyBP_kNEMmhtsxSEK1BVL7p5yv0yNLAddMU',
@@ -36,24 +41,23 @@ const config = {
   measurementId: 'G-ZRTRFECLXJ'
 };
 
-const routes: Routes = [
-  { path: 'user-profile', component: UserProfileComponent,  canActivate: [AuthGuard] }
-];
-
 @NgModule({
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule
   ],
   declarations: [
     AppComponent,
@@ -61,7 +65,10 @@ const routes: Routes = [
     GetPatientBundleComponent,
     GetMedicationRequestBundleComponent,
     GetMedicationDispenseBundleComponent,
-    GetMedicationAdministrationBundleComponent
+    GetMedicationAdministrationBundleComponent,
+    PostMedicationAdministrationComponent,
+    LoginComponent,
+    HeaderComponent
   ],
   bootstrap: [AppComponent],
   providers: [AuthGuard]
