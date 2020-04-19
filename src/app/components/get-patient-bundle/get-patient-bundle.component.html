@@ -7,7 +7,7 @@
       <mat-card-content>
         <table>
           <tr><td>Azonosító szám: </td><td>{{patient.resource.id}}</td></tr>
-          <tr><td>Cím: </td><td>{{patient.resource.address[0].state + " " + patient.resource.address[0].postalCode + " " + patient.resource.address[0].country + " " + patient.resource.address[0].city}}</td></tr>
+          <tr><td>Cím: </td><td>{{patient.resource.address[0].country + " " + patient.resource.address[0].postalCode + " " + patient.resource.address[0].state + " " + patient.resource.address[0].city}}</td></tr>
           <tr><td>Nem: </td><td>{{patient.resource.gender}}</td></tr>
           <tr><td>Kapcsolati státusz: </td><td>{{patient.resource.maritalStatus.text}}</td></tr>
         </table>

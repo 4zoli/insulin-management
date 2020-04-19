@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../shared/services/auth/auth.service';
 import {AppComponent} from '../../app.component';
+import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,11 @@ export class HeaderComponent implements OnInit {
   showPostMedicationAdministrationComponent() {
     this.appcomponent.router.navigateByUrl('post-medication-administration').then();
     console.log('post-medication-administration');
+  }
+
+  showPostMedicationDispenseComponent() {
+    this.appcomponent.router.navigateByUrl('post-medication-dispense').then();
+    console.log('post-medication-dispense');
   }
 
   showGetMedicationRequestBundleComponent() {
@@ -37,6 +43,11 @@ export class HeaderComponent implements OnInit {
   showGetPatientComponent() {
     this.appcomponent.router.navigateByUrl('get-patient-bundle').then();
     console.log('get-patient');
+  }
+
+  showGetPractitionerComponent() {
+    this.appcomponent.router.navigateByUrl('get-practitioner-bundle').then();
+    console.log('get-practitioner');
   }
 
   showDeleteFromDatabaseComponent() {

@@ -33,6 +33,9 @@ import {PostMedicationAdministrationComponent} from './components/post-medicatio
 /** Components - Functions - DELETE */
 import {MatCardModule} from "@angular/material/card";
 import { DeleteFromDatabaseComponent } from './components/delete-from-database/delete-from-database.component';
+import { GetPractitionerBundleComponent } from './components/get-practitioner-bundle/get-practitioner-bundle.component';
+import { PostPatientComponent } from './components/post-patient/post-patient.component';
+import { PostMedicationDispenseComponent } from './components/post-medication-dispense/post-medication-dispense.component';
 
 const config = {
   apiKey: 'AIzaSyBP_kNEMmhtsxSEK1BVL7p5yv0yNLAddMU',
@@ -72,7 +75,10 @@ const config = {
     PostMedicationAdministrationComponent,
     LoginComponent,
     HeaderComponent,
-    DeleteFromDatabaseComponent
+    DeleteFromDatabaseComponent,
+    GetPractitionerBundleComponent,
+    PostPatientComponent,
+    PostMedicationDispenseComponent
   ],
   bootstrap: [AppComponent],
   providers: [AuthGuard]

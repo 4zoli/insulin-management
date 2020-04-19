@@ -11,11 +11,13 @@ import {LoginComponent} from '../../components/login/login.component';
 
 /** Components - Functions - POST */
 import {PostMedicationAdministrationComponent} from '../../components/post-medication-administration/post-medication-administration.component';
+import {PostMedicationDispenseComponent} from "../../components/post-medication-dispense/post-medication-dispense.component";
 /** Components - Functions - GET */
 import {GetMedicationAdministrationBundleComponent} from '../../components/get-medication-administration-bundle/get-medication-administration-bundle.component';
 import {GetMedicationDispenseBundleComponent} from '../../components/get-medication-dispense-bundle/get-medication-dispense-bundle.component';
 import {GetMedicationRequestBundleComponent} from '../../components/get-medication-request-bundle/get-medication-request-bundle.component';
 import {GetPatientBundleComponent} from '../../components/get-patient-bundle/get-patient-bundle.component';
+import {GetPractitionerBundleComponent} from "../../components/get-practitioner-bundle/get-practitioner-bundle.component";
 /** Components - Functions - DELETE */
 import {DeleteFromDatabaseComponent} from "../../components/delete-from-database/delete-from-database.component";
 
@@ -25,11 +27,13 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent,  canActivate: [AuthGuard] },
 
   { path: 'post-medication-administration', component: PostMedicationAdministrationComponent, canActivate: [AuthGuard] },
+  { path: 'post-medication-dispense', component: PostMedicationDispenseComponent, canActivate: [AuthGuard]},
 
   { path: 'get-medication-request-bundle', component: GetMedicationRequestBundleComponent, canActivate: [AuthGuard] },
   { path: 'get-medication-dispense-bundle', component: GetMedicationDispenseBundleComponent, canActivate: [AuthGuard] },
   { path: 'get-medication-administration-bundle', component: GetMedicationAdministrationBundleComponent, canActivate: [AuthGuard] },
   { path: 'get-patient-bundle', component: GetPatientBundleComponent, canActivate: [AuthGuard] },
+  { path: 'get-practitioner-bundle', component: GetPractitionerBundleComponent, canActivate: [AuthGuard] },
 
   { path: 'delete-from-database', component: DeleteFromDatabaseComponent, canActivate: [AuthGuard]}
 

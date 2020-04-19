@@ -6,11 +6,13 @@
   <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
 </mat-toolbar-row>
 <mat-toolbar-row>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationAdministrationComponent()">Adminisztrálás</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationAdministrationComponent()">Adminisztrálás !</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationDispenseComponent()">Kiváltás !</button>
   <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationRequestBundleComponent()">Receptek</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationDispenseBundleComponent()">Kiváltások</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationDispenseBundleComponent()">Kiváltott receptek</button>
   <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationAdministrationBundleComponent()">Adminisztrációk</button>
   <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPatientComponent()">Páciensek</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPractitionerComponent()">Orvosok</button>
   <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showDeleteFromDatabaseComponent()">Törlés</button>
 </mat-toolbar-row>
 </mat-toolbar>
