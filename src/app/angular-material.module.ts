@@ -1,7 +1,8 @@
+/** Needed Libs */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Materials
+/** Materials */
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatSliderModule} from '@angular/material/slider';
@@ -21,6 +22,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -44,7 +46,9 @@ import {MatCardModule} from '@angular/material/card';
     MatPaginatorModule,
     CommonModule,
     MatSliderModule,
-    MatCardModule
+    MatCardModule,
+    MatCardModule,
+    MatMenuModule,
   ],
   exports: [
     MatButtonModule,

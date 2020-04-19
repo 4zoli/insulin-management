@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" *ngIf="auth.user$ | async as user;">
+<mat-toolbar-row>
+  <img src="{{user.photoURL}}" alt="" height="100%">
+  <h1 class="fill-space"></h1>
+  <h1  class="fill-space">{{'Bejelentkezve mint: ' + user.displayName}}<h2>{{user.email}}</h2></h1>
+  <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
+</mat-toolbar-row>
+<mat-toolbar-row>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationAdministrationComponent()">Adminisztrálás</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationRequestBundleComponent()">Receptek</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationDispenseBundleComponent()">Kiváltások</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationAdministrationBundleComponent()">Adminisztrációk</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPatientComponent()">Páciensek</button>
+  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showDeleteFromDatabaseComponent()">Törlés</button>
+</mat-toolbar-row>
+</mat-toolbar>

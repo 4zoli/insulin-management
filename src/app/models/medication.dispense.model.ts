@@ -1,76 +1,72 @@
-/* tslint:disable */
 export interface MedicationDispense {
-  resourceType:              string;
-  id:                        string;
-  text:                      Text;
-  status:                    string;
-  medicationCodeableConcept: MedicationCodeableConcept;
-  subject:                   Subject;
-  performer:                 Performer[];
-  authorizingPrescription:   AuthorizingPrescription[];
-  type:                      MedicationCodeableConcept;
-  quantity:                  DaysSupply;
-  daysSupply:                DaysSupply;
-  whenPrepared:              Date;
-  dosageInstruction:         DosageInstruction[];
-  meta:                      Meta;
+  resource: Resource;
 }
-
-export interface AuthorizingPrescription {
-  reference: string;
+export interface Resource {
+  resourceType: string;
+  id: string;
+  text: Text;
+  status: string;
+  medicationCodeableConcept: RouteOrMedicationCodeableConceptOrType;
+  subject: Subject;
+  performer?: (PerformerEntity)[] | null;
+  authorizingPrescription?: (ActorOrOnBehalfOfOrAuthorizingPrescriptionEntity)[] | null;
+  type: RouteOrMedicationCodeableConceptOrType;
+  quantity: Quantity;
+  daysSupply: DoseQuantityOrDaysSupply;
+  whenPrepared: string;
+  dosageInstruction?: (DosageInstructionEntity)[] | null;
+  meta: Meta;
 }
-
-export interface DaysSupply {
-  value:  number;
-  unit?:  string;
+export interface Text {
+  status: string;
+  div: string;
+}
+export interface RouteOrMedicationCodeableConceptOrType {
+  coding?: (CodingEntity)[] | null;
+}
+export interface CodingEntity {
   system: string;
-  code:   string;
-}
-
-export interface DosageInstruction {
-  sequence:     number;
-  text:         string;
-  timing:       Timing;
-  route:        MedicationCodeableConcept;
-  doseQuantity: DaysSupply;
-}
-
-export interface MedicationCodeableConcept {
-  coding: Coding[];
-}
-
-export interface Coding {
-  system:  string;
-  code:    string;
+  code: string;
   display: string;
 }
-
+export interface Subject {
+  reference: string;
+  display: string;
+}
+export interface PerformerEntity {
+  actor: ActorOrOnBehalfOfOrAuthorizingPrescriptionEntity;
+  onBehalfOf: ActorOrOnBehalfOfOrAuthorizingPrescriptionEntity;
+}
+export interface ActorOrOnBehalfOfOrAuthorizingPrescriptionEntity {
+  reference: string;
+}
+export interface Quantity {
+  value: number;
+  system: string;
+  code: string;
+}
+export interface DoseQuantityOrDaysSupply {
+  value: number;
+  unit: string;
+  system: string;
+  code: string;
+}
+export interface DosageInstructionEntity {
+  sequence: number;
+  text: string;
+  timing: Timing;
+  route: RouteOrMedicationCodeableConceptOrType;
+  doseQuantity: DoseQuantityOrDaysSupply;
+}
 export interface Timing {
   repeat: Repeat;
 }
-
 export interface Repeat {
-  frequency:  number;
-  period:     number;
+  frequency: number;
+  period: number;
   periodUnit: string;
 }
-
 export interface Meta {
-  lastUpdated: Date;
-  versionId:   string;
-}
-
-export interface Performer {
-  actor:      AuthorizingPrescription;
-  onBehalfOf: AuthorizingPrescription;
-}
-
-export interface Subject {
-  reference: string;
-  display:   string;
-}
-
-export interface Text {
-  status: string;
-  div:    string;
+  versionId: string;
+  lastUpdated: string;
 }

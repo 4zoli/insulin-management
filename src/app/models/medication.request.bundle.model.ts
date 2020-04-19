@@ -1,90 +1,52 @@
-/* tslint:disable */
-export interface Interface {
-  body: MedicationRequestBundle;
-}
-
 export interface MedicationRequestBundle {
   resourceType: string;
-  id:           string;
-  type:         string;
-  total:        number;
-  link:         Link[];
-  entry:        Entry[];
+  id: string;
+  type: string;
+  total: number;
+  link?: (LinkEntity)[] | null;
+  entry?: (EntryEntity)[] | null;
 }
-
-export interface Entry {
-  fullUrl:  string;
+export interface LinkEntity {
+  relation: string;
+  url: string;
+}
+export interface EntryEntity {
+  fullUrl: string;
   resource: Resource;
-  search:   Search;
+  search: Search;
 }
-
 export interface Resource {
-  resourceType:              ResourceType;
-  id:                        string;
-  status:                    Status;
-  intent:                    Intent;
+  resourceType: string;
+  id: string;
+  status: string;
+  intent: string;
   medicationCodeableConcept: MedicationCodeableConcept;
-  subject:                   Context;
-  context:                   Context;
-  authoredOn:                Date;
-  requester:                 Requester;
-  meta:                      Meta;
+  subject: AgentOrOnBehalfOfOrSubjectOrContext;
+  context: AgentOrOnBehalfOfOrSubjectOrContext;
+  authoredOn: string;
+  requester: Requester;
+  meta: Meta;
 }
-
-export interface Context {
+export interface MedicationCodeableConcept {
+  coding?: (CodingEntity)[] | null;
+  text: string;
+}
+export interface CodingEntity {
+  system: string;
+  code: string;
+  display: string;
+}
+export interface AgentOrOnBehalfOfOrSubjectOrContext {
   reference: string;
 }
-
-export enum Intent {
-  Order = "order",
-}
-
-export interface MedicationCodeableConcept {
-  coding: Coding[];
-  text:   Text;
-}
-
-export interface Coding {
-  system:  string;
-  code:    string;
-  display: Text;
-}
-
-export enum Text {
-  Amlodipine5MGOralTablet = "Amlodipine 5 MG Oral Tablet",
-  Clopidogrel75MGOralTablet = "Clopidogrel 75 MG Oral Tablet",
-  Nitroglycerin04MGACTUATMucosalSpray = "Nitroglycerin 0.4 MG/ACTUAT Mucosal Spray",
-  Simvastatin20MGOralTablet = "Simvastatin 20 MG Oral Tablet",
-}
-
-export interface Meta {
-  lastUpdated: Date;
-  versionId:   string;
-}
-
 export interface Requester {
-  agent:      Context;
-  onBehalfOf: Context;
+  agent: AgentOrOnBehalfOfOrSubjectOrContext;
+  onBehalfOf: AgentOrOnBehalfOfOrSubjectOrContext;
 }
-
-export enum ResourceType {
-  MedicationRequest = "MedicationRequest",
+export interface Meta {
+  lastUpdated: string;
+  versionId: string;
 }
-
-export enum Status {
-  Active = "active",
-  Stopped = "stopped",
-}
-
 export interface Search {
-  mode: Mode;
-}
-
-export enum Mode {
-  Match = "match",
-}
-
-export interface Link {
-  relation: string;
-  url:      string;
+  mode: string;
 }

@@ -1,34 +1,38 @@
+/* tslint:disable */
+
+/** Needed Libs */
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthGuard } from './shared/guard/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './shared/routing/app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyMaterialModule } from '@ngx-formly/material';
 
-// Needed libs
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import {AuthGuard} from './shared/guard/auth.guard';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-// Angular Material Module
+/** Angular Material Module */
 import {AngularMaterialModule} from './angular-material.module';
-import {MatCardModule} from '@angular/material/card';
-import {HttpClientModule} from '@angular/common/http';
+
+/** Components - Site */
+import { LoginComponent } from './components/login/login.component';
+import { HeaderComponent } from './components/header/header.component';
+/** Components - Functions - GET */
 import {GetPatientBundleComponent} from './components/get-patient-bundle/get-patient-bundle.component';
 import { GetMedicationRequestBundleComponent } from './components/get-medication-request-bundle/get-medication-request-bundle.component';
 import { GetMedicationDispenseBundleComponent } from './components/get-medication-dispense-bundle/get-medication-dispense-bundle.component';
-// tslint:disable-next-line:max-line-length
 import { GetMedicationAdministrationBundleComponent } from './components/get-medication-administration-bundle/get-medication-administration-bundle.component';
-import {MatMenuModule} from '@angular/material/menu';
-import { FormlyModule } from '@ngx-formly/core';
-import { FormlyMaterialModule } from '@ngx-formly/material';
+/** Components - Functions - POST */
 import {PostMedicationAdministrationComponent} from './components/post-medication-administration/post-medication-administration.component';
-import { LoginComponent } from './components/login/login.component';
-import { HeaderComponent } from './header/header.component';
+/** Components - Functions - DELETE */
+import {MatCardModule} from "@angular/material/card";
+import { DeleteFromDatabaseComponent } from './components/delete-from-database/delete-from-database.component';
 
 const config = {
   apiKey: 'AIzaSyBP_kNEMmhtsxSEK1BVL7p5yv0yNLAddMU',
@@ -53,11 +57,10 @@ const config = {
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    MatCardModule,
     HttpClientModule,
-    MatMenuModule,
     FormlyModule.forRoot(),
-    FormlyMaterialModule
+    FormlyMaterialModule,
+    MatCardModule
   ],
   declarations: [
     AppComponent,
@@ -68,7 +71,8 @@ const config = {
     GetMedicationAdministrationBundleComponent,
     PostMedicationAdministrationComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
+    DeleteFromDatabaseComponent
   ],
   bootstrap: [AppComponent],
   providers: [AuthGuard]

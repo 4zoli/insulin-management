@@ -1,8 +1,3 @@
-/* tslint:disable */
-export interface Interface {
-  body: MedicationDispenseBundle;
-}
-
 export interface MedicationDispenseBundle {
   resourceType: string;
   id: string;
@@ -86,8 +81,8 @@ export interface Repeat {
   periodUnit: string;
 }
 export interface Meta {
-  lastUpdated: string;
   versionId: string;
+  lastUpdated: string;
 }
 export interface Search {
   mode: string;

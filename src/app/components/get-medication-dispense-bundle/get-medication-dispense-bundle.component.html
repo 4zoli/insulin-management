@@ -1,4 +1,4 @@
-<div *ngFor="let medicationDispense of appcomponent.medicationDispenseBundleArray[0].entry">
+<div *ngFor="let medicationDispense of this.medicationDispenseArray">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{medicationDispense.resource.subject.display + ' - ' + medicationDispense.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {FormGroup} from '@angular/forms';
 import {AppComponent} from '../../app.component';
-
+import {MedicationAdministration} from '../../models/medication.administration.model';
 
 @Component({
   selector: 'app-post-medication-administration',
@@ -172,11 +172,18 @@ export class PostMedicationAdministrationComponent implements OnInit {
     },
   ];
 
-private function;
+  postMedicationAdministration(medicationAdministrationdata: MedicationAdministration) {
+    this.appcomponent.api
+      .postMedicationAdministration(medicationAdministrationdata)
+      .subscribe(response => {
+        return this.appcomponent.arrayForAnyResponse.push(response);
+      });
+  }
 
   onSubmit() {
-    this.appcomponent.postMedicationAdministration(this.model);
-    console.log(this.appcomponent.spresp);
+    // @ts-ignore
+    this.postMedicationAdministration(this.model);
+    console.log(this.appcomponent.arrayForAnyResponse);
   }
 
   ngOnInit(): void {

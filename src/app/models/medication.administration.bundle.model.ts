@@ -1,8 +1,3 @@
-/* tslint:disable */
-export interface Interface {
-  body: MedicationAdministrationBundle;
-}
-
 export interface MedicationAdministrationBundle {
   resourceType: string;
   id: string;
@@ -22,31 +17,24 @@ export interface EntryEntity {
 }
 export interface Resource {
   resourceType: string;
-  id: string;
-  text: Text;
   status: string;
-  medicationCodeableConcept: RouteOrMedicationCodeableConcept;
-  subject: Subject;
+  medicationCodeableConcept: MedicationCodeableConcept;
+  subject: ActorOrSubject;
   effectivePeriod: EffectivePeriod;
   performer?: (PerformerEntity)[] | null;
   prescription: Prescription;
   dosage: Dosage;
   meta: Meta;
+  id: string;
 }
-export interface Text {
-  status: string;
-  div: string;
-}
-export interface RouteOrMedicationCodeableConcept {
+export interface MedicationCodeableConcept {
   coding?: (CodingEntity)[] | null;
 }
 export interface CodingEntity {
-  system: string;
-  code: string;
   display: string;
 }
-export interface Subject {
-  reference?: string | null;
+export interface ActorOrSubject {
+  reference: string;
   display: string;
 }
 export interface EffectivePeriod {
@@ -54,30 +42,22 @@ export interface EffectivePeriod {
   end: string;
 }
 export interface PerformerEntity {
-  actor: Actor;
-}
-export interface Actor {
-  reference?: string | null;
-  display?: string | null;
-  id?: string | null;
+  actor: ActorOrSubject;
 }
 export interface Prescription {
   reference: string;
 }
 export interface Dosage {
   text: string;
-  route: RouteOrMedicationCodeableConcept;
   dose: Dose;
 }
 export interface Dose {
   value: number;
   unit: string;
-  system: string;
-  code: string;
 }
 export interface Meta {
-  lastUpdated: string;
   versionId: string;
+  lastUpdated: string;
 }
 export interface Search {
   mode: string;

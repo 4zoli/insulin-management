@@ -1,4 +1,4 @@
-<div *ngFor="let patient of appcomponent.patientBundleArray[0].entry">
+<div *ngFor="let patient of this.patientArray">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{patient.resource.name[0].family + " " + patient.resource.name[0].given}}</mat-card-title>

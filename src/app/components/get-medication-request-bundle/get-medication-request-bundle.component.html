@@ -1,4 +1,4 @@
-<div *ngFor="let medicationRequest of appcomponent.medicationRequestBundleArray[0].entry">
+<div *ngFor="let medicationRequest of this.medicationRequestArray">
   <mat-card>
     <mat-card-header>
       <mat-card-title>{{medicationRequest.resource.medicationCodeableConcept.text}}</mat-card-title>
