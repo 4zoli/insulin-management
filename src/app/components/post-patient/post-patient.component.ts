@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {AppComponent} from "../../app.component";
-import {FormlyFieldConfig} from "@ngx-formly/core";
-import {MedicationAdministration} from "../../models/medication.administration.model";
-import {Patient} from "../../models/patient.model";
+import {FormGroup} from '@angular/forms';
+import {AppComponent} from '../../app.component';
+import {FormlyFieldConfig} from '@ngx-formly/core';
+import {Patient} from '../../models/patient.model';
 
 @Component({
   selector: 'app-post-patient',
@@ -11,167 +10,246 @@ import {Patient} from "../../models/patient.model";
   styleUrls: ['./post-patient.component.css']
 })
 export class PostPatientComponent implements OnInit {
-  constructor(public appcomponent: AppComponent) { }
+  constructor(public appcomponent: AppComponent) {
+  }
   form = new FormGroup({});
   model = {
     resourceType: 'Patient',
-    status: 'completed',
-    medicationCodeableConcept: {
-      coding: [
-        {
-          display: 'Lantus 100 unit/ml injectable solution'
-        }
+    id: '1',
+    identifier: [{
+      value: this.appcomponent.userEmail,
+    }],
+    name: [
+    {
+      use: 'official',
+      family: this.appcomponent.userName.length === 3 ? this.appcomponent.userName[2] : this.appcomponent.userName[1],
+      given: [
+        this.appcomponent.userName[0],
       ]
+    }
+  ],
+  telecom: [
+    {
+      system: 'email',
+      value: this.appcomponent.userEmail,
+      use: 'home'
     },
-    subject: {
-      reference: 'Patient/pat1',
-      display: 'Horváth Olivér'
-    },
-    effectivePeriod: {
-      start: '2015-01-15T04:30:00+01:00',
-      end: '2015-01-15T14:30:00+01:00'
-    },
-    performer: [
+    {
+      system: 'phone',
+      value: '06203322123',
+      use: 'mobile'
+    }
+  ],
+  gender: 'male',
+  birthDate: '1991-10-03',
+  address: [
+    {
+      line: [
+        ''
+      ],
+      city: '',
+      state: '',
+      postalCode: '',
+      country: ''
+    }
+  ],
+  maritalStatus: {
+    coding: [
       {
-        actor: {
-          reference: 'Practitioner/f007',
-          display: 'Patrick Pump'
-        }
+        system: 'http://hl7.org/fhir/v3/MaritalStatus',
+        code: 'Kapcsolati státusz kód'
       }
     ],
-    prescription: {
-      reference: 'MedicationRequest/medrx0320'
-    },
-    dosage: {
-      text: '20 Unit SC before breakfast',
-      dose: {
-        value: 20,
-        unit: 'U',
+    text: 'Kapcsolati státusz'
+  },
+  communication: [
+    {
+      language: {
+        coding: [
+          {
+            system: 'urn:ietf:bcp:47',
+            display: 'English'
+          }
+        ]
       }
-    },
-    meta: {
-      lastUpdated: '2020-04-18T21:17:57Z',
-      versionId: '1'
     }
+  ],
+  meta: {
+    versionId: '1',
+    lastUpdated: new Date()
+  }
+}
 
-  };
-
-  fields: FormlyFieldConfig[] = [
-    {
-      key: 'status',
-      type: 'radio',
-      templateOptions: {
-        label: 'Státusz',
-        placeholder: 'Placeholder',
-        description: 'Válaszd ki az állapotot:',
-        options: [
-          // 	in-progress | on-hold | completed | entered-in-error | stopped | unknown
-          {value: 'in-progress', label: 'Folyamatban'},
-          {value: 'on-hold', label: 'Félbehagyva'},
-          {value: 'completed', label: 'Befejezett'},
-          {value: 'entered-in-error', label: 'Hiba történt'},
-          {value: 'stopped', label: 'Megállított'},
-          {value: 'unknown', label: 'Ismeretlen'},
-        ],
-      },
+fields: FormlyFieldConfig[] = [
+  {
+    key: 'name[0].family',
+    type: 'input',
+    templateOptions: {
+      type: 'text',
+      label: 'Vezetéknév',
+      disabled: true
     },
+  },
+  {
+    key: 'name[0].given[0]',
+    type: 'input',
+    templateOptions: {
+      type: 'text',
+      label: 'Keresztnév',
+      disabled: true
+    },
+  },
+  {
+    key: 'telecom[1].value',
+    type: 'input',
+    templateOptions: {
+      type: 'text',
+      label: 'Mobil telefonszám',
+    },
+  },
+  {
+    key: 'gender',
+    type: 'radio',
+    templateOptions: {
+      label: 'Az ön neme',
+      placeholder: 'Nem',
+      options: [
+        {value: 'male', label: 'Férfi'},
+        {value: 'female', label: 'Nő'},
+      ],
+    },
+  },
+  {
+    key: 'communication[0].language.coding[0].display',
+    type: 'select',
+    templateOptions: {
+      label: 'Nyelv',
+      options: [
+        {value: 'Magyar', label: 'Magyar'},
+        {value: 'Angol', label: 'Angol'},
+      ],
+      required: true
+    },
+  },
     {
-      key: 'medicationCodeableConcept.coding[0].display',
+      key: 'birthDate',
       type: 'input',
       templateOptions: {
         type: 'text',
-        label: 'Készítmény',
-        placeholder: 'Készítmény megnevezése',
-      }
-    },
-    {
-      key: 'subject.reference',
-      type: 'input',
-      templateOptions: {
-        type: 'text',
-        label: 'Páciens azonosítója',
-        placeholder: 'Adja meg az azonosítóját',
-      }
-    },
-    {
-      key: 'subject.display',
-      type: 'input',
-      templateOptions: {
-        type: 'text',
-        label: 'Páciens teljes neve',
-        placeholder: 'Adja meg a nevét',
+        label: 'Születési idő',
+        placeholder: 'Adja meg a születési idejét',
         required: true
-      }
-    },
-    {
-      key: 'effectivePeriod.start',
-      type: 'input',
-      templateOptions: {
-        label: 'Bevétel kezdete',
-        placeholder: '2020-01-15T04:30:00+01:00',
-        required: true
+      },
+      validators: {
+        validation: ['date'],
       },
     },
     {
-      key: 'effectivePeriod.end',
-      type: 'input',
-      templateOptions: {
-        label: 'Bevétel vége',
-        placeholder: '2020-01-15T04:30:00+01:00',
-        required: true
-      },
+    key: 'address[0].country',
+    type: 'select',
+    templateOptions: {
+      label: 'Ország',
+      placeholder: 'HU',
+      options: [
+        {value: 'HU', label: 'Magyarország'},
+        {value: 'US', label: 'Egyesült államok'},
+        {value: 'UK', label: 'Egyesült királyság'},
+      ],
+      required: true
     },
-    {
-      key: 'performer[0].actor.reference',
-      type: 'input',
-      templateOptions: {
-        label: 'Gyógyszert felíró azonosítója',
-        placeholder: 'Practitioner/2',
-      }
+  },
+  {
+    key: 'address[0].state',
+    type: 'select',
+    templateOptions: {
+      label: 'Megye',
+      options: [
+        {value: 'Baranya', label: 'Baranya'},
+        {value: 'Bács-Kiskun', label: 'Bács-Kiskun'},
+        {value: 'Békés', label: 'Békés'},
+        {value: 'Borsod-Abaúj-Zemplén', label: 'Borsod-Abaúj-Zemplén'},
+        {value: 'Fejér', label: 'Fejér'},
+        {value: 'Csongrád', label: 'Csongrád'},
+        {value: 'Győr-Moson-Sopron', label: 'Győr-Moson-Sopron'},
+        {value: 'Hajdú-Bihar', label: 'Hajdú-Bihar'},
+        {value: 'Heves', label: 'Heves'},
+        {value: 'Jász-Nagykun-Szolnok', label: 'Jász-Nagykun-Szolnok'},
+        {value: 'Komárom-Esztergom', label: 'Komárom-Esztergom'},
+        {value: 'Nógrád', label: 'Nógrád'},
+        {value: 'Pest', label: 'Pest'},
+        {value: 'Somogy', label: 'Somogy'},
+        {value: 'Szabolcs-Szatmár-Bereg', label: 'Szabolcs-Szatmár-Bereg'},
+        {value: 'Tolna', label: 'Tolna'},
+        {value: 'Vas', label: 'Vas'},
+        {value: 'Veszprém', label: 'Veszprém'},
+        {value: 'Zala', label: 'Zala'},
+      ],
+      required: true
     },
-    {
-      key: 'performer[0].actor.display',
-      type: 'input',
-      templateOptions: {
-        label: 'Gyógyszert felíró neve',
-        placeholder: 'Patrick Pump',
-      }
+  },
+  {
+    key: 'address[0].postalCode',
+    type: 'input',
+    templateOptions: {
+      label: 'Irányítószám',
+      placeholder: '6723',
+      required: true
     },
-    {
-      key: 'prescription.reference',
-      type: 'input',
-      templateOptions: {
-        label: 'Recept azonosítója',
-        placeholder: 'MedicationRequest/medrx0320',
-      }
+  },
+  {
+    key: 'address[0].city',
+    type: 'input',
+    templateOptions: {
+      label: 'Város',
+      placeholder: 'Szeged',
+      required: true
     },
-    {
-      key: 'dosage.text',
-      type: 'input',
-      templateOptions: {
-        label: 'Rövid leírás',
-        placeholder: 'Például: 20 egység ebéd előtt.',
-      }
+  },
+  {
+    key: 'address[0].line[0]',
+    type: 'input',
+    templateOptions: {
+      label: 'Utca, házszám',
+      required: true
     },
-    {
-      key: 'dosage.dose.value',
-      type: 'input',
-      templateOptions: {
-        label: 'Mennyiség',
-        placeholder: 'Szám szerinti mennyiség megadása, pl: 20',
-      }
+  },
+  {
+    key: 'telecom[0].value',
+    type: 'input',
+    templateOptions: {
+      label: 'Email cím',
+      required: true
     },
-    {
-      key: 'dosage.dose.unit',
-      type: 'input',
-      templateOptions: {
-        label: 'Egység megnevezése',
-        placeholder: 'U - Unit',
-      }
+  },
+  {
+    key: 'maritalStatus.coding[0].code',
+    type: 'select',
+    templateOptions: {
+      label: 'Kapcsolati státusza',
+      options: [
+        /*
+        A	Annulled	Marriage contract has been declared null and to not have existed
+        D	Divorced	Marriage contract has been declared dissolved and inactive
+        I	Interlocutory	Subject to an Interlocutory Decree.
+        L	Legally Separated	Legally Separated
+        M	Married	A current marriage contract is active
+        P	Polygamous	More than 1 current spouse
+        S	Never Married	No marriage contract has ever been entered
+        T	Domestic partner	Person declares that a domestic partner relationship exists.
+        U	unmarried	Currently not in a marriage contract.
+        W	Widowed	The spouse has died
+        */
+        {value: 'M', label: 'Házas'},
+        {value: 'D', label: 'Elvált'},
+        {value: 'W', label: 'Özvegy'},
+        {value: 'U', label: 'Kapcsolatban'},
+        {value: 'L', label: 'Egyedülálló'},
+      ],
     },
+  },
   ];
 
-  postPatient(patientdata: Patient) {
+postPatient(patientdata: Patient) {
     this.appcomponent.api
       .postPatient(patientdata)
       .subscribe(response => {
@@ -179,11 +257,15 @@ export class PostPatientComponent implements OnInit {
       });
   }
 
-  onSubmit() {
+onSubmit() {
     // @ts-ignore
     this.postPatient(this.model);
     console.log(this.appcomponent.arrayForAnyResponse);
-  }
-  ngOnInit(): void {
-  }
+    this.appcomponent.router.navigateByUrl('/app-root', { skipLocationChange: true }).then(() => {
+      this.appcomponent.router.navigate(['post-medication-administration']);
+  });
+}
+ngOnInit() {
+
+}
 }

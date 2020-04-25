@@ -12,27 +12,41 @@ export class GetMedicationRequestBundleComponent implements OnInit {
   constructor(public appcomponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.getMedicationRequestBundle();
-  }
+    console.log('user level' + this.appcomponent.userLevel);
+    this.reloadRequests();
+    }
 
-  getMedicationRequestBundle() {
+  getMedicationRequestBundle(queryParams: any) {
     // this.medicationRequestsArray.length = 0;
-    this.appcomponent.api.getMedicationRequestBundle()
+    this.appcomponent.api.getMedicationRequestBundle(queryParams)
       .subscribe(response => {
         console.log(response);
         const keys = response.headers.keys();
         keys.map(key =>
           `${key}: ${response.headers.get(key)}`
         );
-
         // @ts-ignore
         this.medicationRequestArray = response.body.entry;
 
-        console.log('Receptek száma: ' + this.medicationRequestArray.length);
-        console.log(this.medicationRequestArray);
+        // console.log('Receptek száma: ' + this.medicationRequestArray.length);
+        // console.log(this.medicationRequestArray);
       });
   }
+
+  deleteMedicationRequest(id: any) {
+    this.appcomponent.api
+      .deleteMedicationRequest(id)
+      .subscribe(response => {
+        return this.appcomponent.arrayForAnyResponse.push(response);
+      });
+    this.medicationRequestArray.length = 0;
+    this.reloadRequests();
+  }
+
+  reloadRequests() {
+    // tslint:disable-next-line:triple-equals
+    this.appcomponent.userLevel == 1 ?
+      this.getMedicationRequestBundle('') :
+      this.getMedicationRequestBundle('?patient=' + this.appcomponent.userEmail);
+  }
 }
-
-
-

@@ -8,16 +8,19 @@ import {MedicationAdministration} from '../../models/medication.administration.m
   styleUrls: ['./get-medication-administration-bundle.component.css']
 })
 export class GetMedicationAdministrationBundleComponent implements OnInit {
+  queryParams: string;
   medicationAdministrationArray: MedicationAdministration[] = [];
-  constructor(public appcomponent: AppComponent) { }
-
-  ngOnInit(): void {
-    this.getMedicationAdministrationBundle();
+  constructor(public appcomponent: AppComponent) {
+    console.log(this.appcomponent.userLevel == 1 ? 'Admin' : 'Felhasznalo');
+    this.appcomponent.userLevel == 1 ? this.queryParams = '' : this.queryParams = '?patient=' + this.appcomponent.userEmail;
   }
 
-  getMedicationAdministrationBundle() {
-    // @ts-ignore
-    this.appcomponent.api.getMedicationAdministrationBundle()
+  ngOnInit(): void {
+    this.getMedicationAdministrationBundle(this.queryParams);
+  }
+
+  getMedicationAdministrationBundle(queryParams: any) {
+    this.appcomponent.api.getMedicationAdministrationBundle(queryParams)
       .subscribe(response => {
         console.log(response);
         const keys = response.headers.keys();
@@ -30,5 +33,15 @@ export class GetMedicationAdministrationBundleComponent implements OnInit {
         console.log('Recept adminisztrációs tömb elemei: ' + this.medicationAdministrationArray.length);
         console.log(this.medicationAdministrationArray);
       });
+  }
+
+  deleteMedicationAdministration(id: any) {
+    this.appcomponent.api
+      .deleteMedicationAdministration(id)
+      .subscribe(response => {
+        return this.appcomponent.arrayForAnyResponse.push(response);
+      });
+    this.medicationAdministrationArray.length = 0;
+    this.getMedicationAdministrationBundle(this.queryParams);
   }
 }

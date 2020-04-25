@@ -11,6 +11,7 @@
         <tr><td>Kapcsolódó recept azonosító: </td><td>{{medicationAdministration.resource.prescription.reference}}</td></tr>
         <tr><td>Felhasznált mennyiség: </td><td>{{medicationAdministration.resource.dosage.text}}</td></tr>
         <tr><td>Utolsó frissítés: </td><td>{{medicationAdministration.resource.meta.lastUpdated}}</td></tr>
+        <tr><td>Recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationAdministration(medicationAdministration.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>
   </mat-card>

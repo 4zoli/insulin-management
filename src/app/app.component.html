@@ -1,2 +1,2 @@
-<app-header *ngIf = "auth.user$"></app-header>
+<app-header *ngIf = "auth.user$ | async as user"></app-header>
 <router-outlet></router-outlet>

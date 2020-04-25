@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../shared/services/auth/auth.service';
+import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
 import {AppComponent} from '../../app.component';
-import {User} from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +9,11 @@ import {User} from '../../models/user.model';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public auth: AuthService, public appcomponent: AppComponent) { }
+  constructor(public auth: GoogleAuthService, public appcomponent: AppComponent) {
+  }
 
   ngOnInit(): void {
+
   }
 
   showPostMedicationAdministrationComponent() {
@@ -23,6 +24,16 @@ export class HeaderComponent implements OnInit {
   showPostMedicationDispenseComponent() {
     this.appcomponent.router.navigateByUrl('post-medication-dispense').then();
     console.log('post-medication-dispense');
+  }
+
+  showPostPatientComponent() {
+    this.appcomponent.router.navigateByUrl('post-patient').then();
+    console.log('post-patient');
+  }
+
+  showPostMedicationRequestComponent() {
+    this.appcomponent.router.navigateByUrl('post-medication-request').then();
+    console.log('post-medication-request');
   }
 
   showGetMedicationRequestBundleComponent() {
@@ -49,11 +60,4 @@ export class HeaderComponent implements OnInit {
     this.appcomponent.router.navigateByUrl('get-practitioner-bundle').then();
     console.log('get-practitioner');
   }
-
-  showDeleteFromDatabaseComponent() {
-    this.appcomponent.router.navigateByUrl('delete-from-database').then();
-    console.log('delete-from-database');
-  }
-
-
 }

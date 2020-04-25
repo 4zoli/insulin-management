@@ -13,8 +13,7 @@ export class GetPractitionerBundleComponent implements OnInit {
     this.getPractitionerBundle();
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getPractitionerBundle() {
     // @ts-ignore

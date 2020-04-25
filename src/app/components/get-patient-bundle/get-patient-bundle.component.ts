@@ -9,15 +9,15 @@ import { Patient} from '../../models/patient.model';
 })
 export class GetPatientBundleComponent implements OnInit {
   patientArray: Patient[] = [];
-  constructor(public appcomponent: AppComponent) { }
-
-  ngOnInit(): void {
-    this.getPatientBundle();
+  constructor(public appcomponent: AppComponent) {
+    this.getPatientBundle('');
   }
 
-  getPatientBundle() {
+  ngOnInit(): void {}
+
+  getPatientBundle(queryParams) {
     // @ts-ignore
-    this.appcomponent.api.getPatientBundle()
+    this.appcomponent.api.getPatientBundle(queryParams)
       .subscribe(response => {
         console.log(response);
         const keys = response.headers.keys();
@@ -25,10 +25,22 @@ export class GetPatientBundleComponent implements OnInit {
           `${key}: ${response.headers.get(key)}`
         );
         // @ts-ignore
-        this.patientArray = response.body.entry;
-
+        if (response.body.entry !== undefined) {
+          // @ts-ignore
+          this.patientArray = response.body.entry;
+        }
         console.log('Páciensek száma: ' + this.patientArray.length);
         console.log(this.patientArray);
       });
+  }
+
+  deletePatient(id: any) {
+    this.appcomponent.api
+      .deletePatient(id)
+      .subscribe(response => {
+        return this.appcomponent.arrayForAnyResponse.push(response);
+      });
+    this.patientArray.length = 0;
+    this.getPatientBundle('');
   }
 }

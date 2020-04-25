@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() {}
+  constructor(public auth: GoogleAuthService) {}
 
 
   ngOnInit(): void {}

@@ -12,10 +12,11 @@ export class GetMedicationDispenseBundleComponent implements OnInit {
   constructor(public appcomponent: AppComponent) { }
 
   ngOnInit(): void {
-    this.getMedicationDispenseBundle();
+    this.reloadDispenses();
   }
-  getMedicationDispenseBundle() {
-    this.appcomponent.api.getMedicationDispenseBundle()
+
+  getMedicationDispenseBundle(queryParams: any) {
+    this.appcomponent.api.getMedicationDispenseBundle(queryParams)
       .subscribe(response => {
         console.log(response);
         const keys = response.headers.keys();
@@ -29,5 +30,22 @@ export class GetMedicationDispenseBundleComponent implements OnInit {
         console.log('Recept kiváltások száma: ' + this.medicationDispenseArray.length);
         console.log(this.medicationDispenseArray);
       });
+  }
+
+  deleteMedicationDispense(id: any) {
+    this.appcomponent.api
+      .deleteMedicationDispense(id)
+      .subscribe(response => {
+        return this.appcomponent.arrayForAnyResponse.push(response);
+      });
+    this.medicationDispenseArray.length = 0;
+    this.reloadDispenses();
+  }
+
+  reloadDispenses() {
+    // tslint:disable-next-line:triple-equals
+    this.appcomponent.userLevel == 1 ?
+      this.getMedicationDispenseBundle('') :
+      this.getMedicationDispenseBundle('?patient=' + this.appcomponent.userEmail);
   }
 }

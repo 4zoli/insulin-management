@@ -142,7 +142,7 @@ export class PostMedicationDispenseComponent implements OnInit {
       }
     },
     {
-      key: 'authorizingPrescription',
+      key: 'authorizingPrescription[0].reference',
       type: 'input',
       templateOptions: {
         label: 'Recept azonosítója',
@@ -230,7 +230,7 @@ export class PostMedicationDispenseComponent implements OnInit {
       }
     },
     {
-      key: 'dosageInstruction[0].dosageQuantity.value',
+      key: 'dosageInstruction[0].dosage.Quantity.value',
       type: 'input',
       templateOptions: {
         label: 'Mennyiség értéke',
@@ -238,7 +238,7 @@ export class PostMedicationDispenseComponent implements OnInit {
       }
     },
     {
-      key: 'dosageInstruction[0].dosageQuantity.unit',
+      key: 'dosageInstruction[0].dosage.Quantity.unit',
       type: 'input',
       templateOptions: {
         label: 'Mennyiség mértékegysége',
@@ -246,7 +246,7 @@ export class PostMedicationDispenseComponent implements OnInit {
       }
     },
     {
-      key: 'dosageInstruction[0].dosageQuantity.code',
+      key: 'dosageInstruction[0].dosage.Quantity.code',
       type: 'input',
       templateOptions: {
         label: 'Mennyiség kódja',

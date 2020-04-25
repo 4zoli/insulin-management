@@ -1,7 +1,7 @@
 <div *ngFor="let medicationRequest of this.medicationRequestArray">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{medicationRequest.resource.medicationCodeableConcept.text}}</mat-card-title>
+      <mat-card-title>{{medicationRequest.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>
       <mat-card-subtitle>{{medicationRequest.resource.medicationCodeableConcept.coding[0].code}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -11,6 +11,7 @@
         <tr><td>Kiváltás dátuma: </td><td>{{medicationRequest.resource.authoredOn}}</td></tr>
         <tr><td>Felíró: </td><td>{{medicationRequest.resource.requester.agent.reference}}</td></tr>
         <tr><td>Utolsó frissítés: </td><td>{{medicationRequest.resource.meta.lastUpdated}}</td></tr>
+        <tr><td>Recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationRequest(medicationRequest.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>
   </mat-card>

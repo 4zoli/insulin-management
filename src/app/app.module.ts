@@ -8,13 +8,13 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AuthGuard } from './shared/guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule, ValidationErrors} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './shared/routing/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormlyModule } from '@ngx-formly/core';
+import {FormlyFieldConfig, FormlyModule} from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 
 /** Angular Material Module */
@@ -31,11 +31,12 @@ import { GetMedicationAdministrationBundleComponent } from './components/get-med
 /** Components - Functions - POST */
 import {PostMedicationAdministrationComponent} from './components/post-medication-administration/post-medication-administration.component';
 /** Components - Functions - DELETE */
-import {MatCardModule} from "@angular/material/card";
-import { DeleteFromDatabaseComponent } from './components/delete-from-database/delete-from-database.component';
 import { GetPractitionerBundleComponent } from './components/get-practitioner-bundle/get-practitioner-bundle.component';
 import { PostPatientComponent } from './components/post-patient/post-patient.component';
 import { PostMedicationDispenseComponent } from './components/post-medication-dispense/post-medication-dispense.component';
+import { PostMedicationRequestComponent } from './components/post-medication-request/post-medication-request.component';
+import {MatCardModule} from "@angular/material/card";
+
 
 const config = {
   apiKey: 'AIzaSyBP_kNEMmhtsxSEK1BVL7p5yv0yNLAddMU',
@@ -47,6 +48,14 @@ const config = {
   appId: '1:791974756775:web:d3747990bd5b74e214b682',
   measurementId: 'G-ZRTRFECLXJ'
 };
+
+// Custom validation
+export function DateValidator(control: FormControl): ValidationErrors {
+  return !control.value || /(\d+)(\d+)(\d+)(\d+)(-)(\d+)(\d+)(-)(\d+)(\d+)/.test(control.value) ? null : { 'date': true };
+}
+export function DateValidatorMessage(err, field: FormlyFieldConfig) {
+  return `"${field.formControl.value}" helytelen formátum! A helyes formátum: YYYY-MM-DD )`;
+}
 
 @NgModule({
   imports: [
@@ -61,9 +70,17 @@ const config = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormlyModule.forRoot(),
+
+    FormlyModule.forRoot({
+      validationMessages: [
+        {name: 'date', message: DateValidatorMessage},
+      ],
+      validators: [
+        {name: 'date', validation: DateValidator},
+      ],
+    }),
     FormlyMaterialModule,
-    MatCardModule
+    MatCardModule,
   ],
   declarations: [
     AppComponent,
@@ -75,10 +92,10 @@ const config = {
     PostMedicationAdministrationComponent,
     LoginComponent,
     HeaderComponent,
-    DeleteFromDatabaseComponent,
     GetPractitionerBundleComponent,
     PostPatientComponent,
-    PostMedicationDispenseComponent
+    PostMedicationDispenseComponent,
+    PostMedicationRequestComponent
   ],
   bootstrap: [AppComponent],
   providers: [AuthGuard]

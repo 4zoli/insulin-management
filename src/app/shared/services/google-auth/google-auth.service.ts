@@ -10,15 +10,15 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
-export class AuthService {
-  user$: Observable<User>;
+export class GoogleAuthService {
+  user$: Observable<User> = new Observable<User>();
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
-    // Get the auth state, then fetch the Firestore user document or return null
+    // Get the google-auth state, then fetch the Firestore user document or return null
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         // Logged in
@@ -35,7 +35,12 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const {user} = await this.afAuth.auth.signInWithPopup(provider);
-    this.router.navigate(['/user-profile']);
+    // this.router.navigate(['/user-profile']);
+    this.router.navigateByUrl('/app-root', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['user-profile']);
+    });
+
+
     return this.updateUserData(user);
   }
 

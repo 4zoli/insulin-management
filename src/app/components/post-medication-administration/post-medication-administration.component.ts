@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {AppComponent} from '../../app.component';
 import {MedicationAdministration} from '../../models/medication.administration.model';
 
+
 @Component({
   selector: 'app-post-medication-administration',
   templateUrl: './post-medication-administration.component.html',
@@ -11,8 +12,8 @@ import {MedicationAdministration} from '../../models/medication.administration.m
 })
 
 export class PostMedicationAdministrationComponent implements OnInit {
-  constructor(public appcomponent: AppComponent) {
-  }
+  constructor(public appcomponent: AppComponent) {}
+
   form = new FormGroup({});
   model = {
     resourceType: 'MedicationAdministration',
@@ -25,23 +26,24 @@ export class PostMedicationAdministrationComponent implements OnInit {
       ]
     },
     subject: {
-      reference: 'Patient/pat1',
-      display: 'Horváth Olivér'
+      reference: 'Patient/' + this.appcomponent.userEmail,
+      // tslint:disable-next-line:max-line-length
+      display: this.appcomponent.userName.length === 2 ? this.appcomponent.userName[1] + ' ' + this.appcomponent.userName[0] : this.appcomponent.userName[2] + ' ' + this.appcomponent.userName[0]
     },
     effectivePeriod: {
-      start: '2015-01-15T04:30:00+01:00',
-      end: '2015-01-15T14:30:00+01:00'
+      start: '2020-04-19T04:30:00+01:00',
+      end: '2015-04-19T14:30:00+01:00'
     },
     performer: [
       {
         actor: {
-          reference: 'Practitioner/f007',
-          display: 'Patrick Pump'
+          reference: 'Practitioner/1',
+          display: 'Vezetéknév Keresztnév'
         }
       }
     ],
     prescription: {
-      reference: 'MedicationRequest/medrx0320'
+      reference: 'MedicationRequest/1'
     },
     dosage: {
       text: '20 Unit SC before breakfast',
@@ -60,49 +62,27 @@ export class PostMedicationAdministrationComponent implements OnInit {
   fields: FormlyFieldConfig[] = [
     {
       key: 'status',
-      type: 'radio',
+      type: 'select',
       templateOptions: {
         label: 'Státusz',
-        placeholder: 'Placeholder',
-        description: 'Válaszd ki az állapotot:',
         options: [
           // 	in-progress | on-hold | completed | entered-in-error | stopped | unknown
           {value: 'in-progress', label: 'Folyamatban'},
           {value: 'on-hold', label: 'Félbehagyva'},
           {value: 'completed', label: 'Befejezett'},
-          {value: 'entered-in-error', label: 'Hiba történt'},
-          {value: 'stopped', label: 'Megállított'},
-          {value: 'unknown', label: 'Ismeretlen'},
         ],
       },
     },
     {
       key: 'medicationCodeableConcept.coding[0].display',
-      type: 'input',
+      type: 'select',
       templateOptions: {
-        type: 'text',
-        label: 'Készítmény',
-        placeholder: 'Készítmény megnevezése',
-      }
-    },
-    {
-      key: 'subject.reference',
-      type: 'input',
-      templateOptions: {
-        type: 'text',
-        label: 'Páciens azonosítója',
-        placeholder: 'Adja meg az azonosítóját',
-      }
-    },
-    {
-    key: 'subject.display',
-    type: 'input',
-    templateOptions: {
-      type: 'text',
-      label: 'Páciens teljes neve',
-      placeholder: 'Adja meg a nevét',
-      required: true
-    }
+        label: 'Készítmény megnevezése',
+        options: [
+          {value: 'Lantus 100 unit/ml injectable solution', label: 'Lantus 100 egység/ml injekció'},
+          {value: 'Novolog 100 unit/ml injectable solution', label: 'Novolog 100 egység/ml injekció'}
+        ],
+      },
     },
     {
       key: 'effectivePeriod.start',
@@ -186,7 +166,7 @@ export class PostMedicationAdministrationComponent implements OnInit {
     console.log(this.appcomponent.arrayForAnyResponse);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {  }
+
 
 }

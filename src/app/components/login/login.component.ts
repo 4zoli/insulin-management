@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../shared/services/auth/auth.service';
+import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
 
 
 @Component({
@@ -9,7 +9,7 @@ import {AuthService} from '../../shared/services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: GoogleAuthService) { }
 
   ngOnInit(): void {
   }

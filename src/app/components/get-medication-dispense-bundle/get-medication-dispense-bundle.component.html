@@ -13,6 +13,7 @@
         <tr><td>Elegendő idő: </td><td>{{medicationDispense.resource.daysSupply.value + ' ' + medicationDispense.resource.daysSupply.unit}}</td></tr>
         <tr><td>Adagolás: </td><td>{{medicationDispense.resource.dosageInstruction[0].text}}</td></tr>
         <tr><td>Készítve: </td><td>{{medicationDispense.resource.whenPrepared}}</td></tr>
+        <tr><td>Kiváltott recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationDispense(medicationDispense.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>
   </mat-card>
