@@ -15,14 +15,21 @@ export class PostMedicationDispenseComponent implements OnInit {
   }
 
   form = new FormGroup({});
-  model = {
+
+  dispenseModel = {
     resourceType: 'MedicationDispense',
+    extension: [
+      {
+        url: 'www.Szakdolgozat.egyszerusitese.celjabol.keszitett.hatralevo.mennyiseg.szamlalo',
+        value: '1800'
+      }
+    ],
     id: '1',
     status: 'completed',
     medicationCodeableConcept: {
       coding: [
         {
-          display: 'Lantus 100 unit/ml injectable solution'
+          display: 'Lantus 100 egység/ml injekció'
         }
       ]
     },
@@ -46,7 +53,7 @@ export class PostMedicationDispenseComponent implements OnInit {
       }
     ],
     quantity: {
-      value: 10,
+      value: 18,
       code: 'ml'
     },
     daysSupply: {
@@ -269,6 +276,7 @@ export class PostMedicationDispenseComponent implements OnInit {
     this.appcomponent.api
       .postMedicationDispense(medicationDispenseData)
       .subscribe(response => {
+        this.appcomponent.snackBar.successMesage('Sikeres kiváltás!');
         return this.appcomponent.arrayForAnyResponse.push(response);
       });
   }

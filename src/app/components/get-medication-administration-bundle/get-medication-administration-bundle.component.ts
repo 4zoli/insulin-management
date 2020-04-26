@@ -10,6 +10,7 @@ import {MedicationAdministration} from '../../models/medication.administration.m
 export class GetMedicationAdministrationBundleComponent implements OnInit {
   queryParams: string;
   medicationAdministrationArray: MedicationAdministration[] = [];
+  private total: number;
   constructor(public appcomponent: AppComponent) {
     console.log(this.appcomponent.userLevel == 1 ? 'Admin' : 'Felhasznalo');
     this.appcomponent.userLevel == 1 ? this.queryParams = '' : this.queryParams = '?patient=' + this.appcomponent.userEmail;
@@ -27,6 +28,8 @@ export class GetMedicationAdministrationBundleComponent implements OnInit {
         keys.map(key =>
           `${key}: ${response.headers.get(key)}`
         );
+        // @ts-ignore
+        this.total = response.body.total;
         // @ts-ignore
         this.medicationAdministrationArray = response.body.entry;
 

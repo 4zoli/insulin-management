@@ -36,6 +36,8 @@ import { PostPatientComponent } from './components/post-patient/post-patient.com
 import { PostMedicationDispenseComponent } from './components/post-medication-dispense/post-medication-dispense.component';
 import { PostMedicationRequestComponent } from './components/post-medication-request/post-medication-request.component';
 import {MatCardModule} from "@angular/material/card";
+import { SnackbarComponent } from './components/snackbar-component/snackbar.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 const config = {
@@ -81,6 +83,7 @@ export function DateValidatorMessage(err, field: FormlyFieldConfig) {
     }),
     FormlyMaterialModule,
     MatCardModule,
+    MatSnackBarModule,
   ],
   declarations: [
     AppComponent,
@@ -95,10 +98,11 @@ export function DateValidatorMessage(err, field: FormlyFieldConfig) {
     GetPractitionerBundleComponent,
     PostPatientComponent,
     PostMedicationDispenseComponent,
-    PostMedicationRequestComponent
+    PostMedicationRequestComponent,
+    SnackbarComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthGuard]
+  providers: [AuthGuard, SnackbarComponent,PostMedicationDispenseComponent,PostMedicationAdministrationComponent]
 })
 
 export class AppModule { }

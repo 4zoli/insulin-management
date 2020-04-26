@@ -1,3 +1,11 @@
+<h2>Kiváltott{{this.appcomponent.userLevel == 1 ? ' receptek' : ' receptjeim'}}</h2>
+
+<mat-card *ngIf="this.total == 0">
+  <mat-card-header>
+    <mat-card-title>{{this.appcomponent.userLevel == 1 ? 'Jelenleg nincsenek kiváltott receptek.' : 'Önnek nincsen kiváltott receptje.'}}</mat-card-title>
+  </mat-card-header>
+</mat-card>
+
 <div *ngFor="let medicationDispense of this.medicationDispenseArray">
   <mat-card>
     <mat-card-header>
@@ -11,11 +19,12 @@
         <tr><td>Páciens azonosító: </td><td>{{medicationDispense.resource.subject.reference}}</td></tr>
         <tr><td>Felíró orvos: </td><td>{{medicationDispense.resource.performer[0].actor.reference}}</td></tr>
         <tr><td>Mennyiség: </td><td>{{medicationDispense.resource.quantity.value + ' ' + medicationDispense.resource.quantity.code}}</td></tr>
-        <tr><td>Elegendő idő: </td><td>{{medicationDispense.resource.daysSupply.value + ' ' + medicationDispense.resource.daysSupply.unit}}</td></tr>
+        <tr><td>Elegendő idő: </td><td>{{medicationDispense.resource.daysSupply.value}} {{medicationDispense.resource.daysSupply.unit === 'Day' ? 'Nap' : medicationDispense.resource.daysSupply.unit}}</td></tr>
         <tr><td>Adagolás: </td><td>{{medicationDispense.resource.dosageInstruction[0].text}}</td></tr>
         <tr><td>Recept felírásának ideje: </td><td>{{medicationDispense.resource.whenPrepared}}</td></tr>
-        <tr><td>Kiváltott recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationDispense(medicationDispense.resource.id)">Törlöm!</button></td></tr>
+        <tr *ngIf="this.appcomponent.userLevel == 1"><td>Kiváltott recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationDispense(medicationDispense.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>
   </mat-card>
   <br>
+</div>

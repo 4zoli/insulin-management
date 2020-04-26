@@ -9,6 +9,7 @@ import {MedicationDispense} from '../../models/medication.dispense.model';
 })
 export class GetMedicationDispenseBundleComponent implements OnInit {
   medicationDispenseArray: MedicationDispense[] = [];
+  private total: number;
   constructor(public appcomponent: AppComponent) { }
 
   ngOnInit(): void {
@@ -26,7 +27,8 @@ export class GetMedicationDispenseBundleComponent implements OnInit {
 
         // @ts-ignore
         this.medicationDispenseArray = response.body.entry;
-
+        // @ts-ignore
+        this.total = response.body.total;
         console.log('Recept kiváltások száma: ' + this.medicationDispenseArray.length);
         console.log(this.medicationDispenseArray);
       });

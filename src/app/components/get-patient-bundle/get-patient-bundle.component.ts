@@ -29,7 +29,9 @@ export class GetPatientBundleComponent implements OnInit {
           // @ts-ignore
           this.patientArray = response.body.entry;
         }
-        console.log('Páciensek száma: ' + this.patientArray.length);
+        // @ts-ignore
+        // tslint:disable-next-line:max-line-length
+        response.body.total > 0 ? this.appcomponent.snackBar.successMesage(this.patientArray.length + ' regisztrált felhasználó található az adatbázisban!') : this.appcomponent.snackBar.successMesage('Nincsenek regisztrált felhasználók!');
         console.log(this.patientArray);
       });
   }

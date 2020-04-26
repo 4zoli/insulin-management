@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,7 +9,9 @@ import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.s
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(public auth: GoogleAuthService) {}
+  constructor(public auth: GoogleAuthService, public appcomponent: AppComponent) {
+    this.appcomponent.snackBar.successMesage('Üdvözöllek az oldalon!');
+  }
 
 
   ngOnInit(): void {}

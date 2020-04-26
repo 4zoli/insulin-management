@@ -26,8 +26,9 @@ export class GetPractitionerBundleComponent implements OnInit {
         );
         // @ts-ignore
         this.practitionerArray = response.body.entry;
-
-        console.log('Orvosok száma: ' + this.practitionerArray.length);
+        // @ts-ignore
+        // tslint:disable-next-line:max-line-length
+        response.body.total > 0 ? this.appcomponent.snackBar.successMesage(this.practitionerArray.length + ' regisztrált orvos található az adatbázisban!') : this.appcomponent.snackBar.successMesage('Nincsenek regisztrált orvosok!');
         console.log(this.practitionerArray);
       });
   }

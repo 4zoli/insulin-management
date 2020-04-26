@@ -15,7 +15,7 @@ export class PostMedicationAdministrationComponent implements OnInit {
   constructor(public appcomponent: AppComponent) {}
 
   form = new FormGroup({});
-  model = {
+  administrationModel = {
     resourceType: 'MedicationAdministration',
     status: 'completed',
     medicationCodeableConcept: {
@@ -156,13 +156,14 @@ export class PostMedicationAdministrationComponent implements OnInit {
     this.appcomponent.api
       .postMedicationAdministration(medicationAdministrationdata)
       .subscribe(response => {
+        this.appcomponent.snackBar.successMesage('Sikeres adminisztrálás!')
         return this.appcomponent.arrayForAnyResponse.push(response);
       });
   }
 
   onSubmit() {
     // @ts-ignore
-    this.postMedicationAdministration(this.model);
+    this.postMedicationAdministration(this.administrationModel);
     console.log(this.appcomponent.arrayForAnyResponse);
   }
 

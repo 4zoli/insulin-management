@@ -1,19 +1,19 @@
 <mat-toolbar color="primary" *ngIf="auth.user$ | async as user;">
-<mat-toolbar-row>
-  <img src="{{user.photoURL}}" height="100%" routerLink="user-profile">
-  <h1 class="fill-space"></h1>
-  <h1  class="fill-space">{{'Bejelentkezve mint: ' + user.displayName}}</h1>
-  <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
-</mat-toolbar-row>
-<mat-toolbar-row>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostPatientComponent()" *ngIf="appcomponent.isProfileCreated == 0 || user.userLevel == 1">Profil létrehozás !</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationRequestComponent()" *ngIf="user.userLevel == 1">Felírás !</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationDispenseComponent()">Kiváltás !</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationAdministrationComponent()">Adminisztrálás !</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationRequestBundleComponent()">Receptek</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationDispenseBundleComponent()">Kiváltott receptek</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationAdministrationBundleComponent()">Adminisztrációk</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPatientComponent()" *ngIf="user.userLevel == 1">Páciensek</button>
-  <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPractitionerComponent()" *ngIf="user.userLevel == 1">Orvosok</button>
-</mat-toolbar-row>
+  <mat-toolbar-row>
+    <img src="{{user.photoURL}}" height="100%" routerLink="user-profile">
+    <h1 class="fill-space"></h1>
+    <h1  class="fill-space">{{'Bejelentkezve mint: ' + user.displayName}}</h1>
+    <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostPatientComponent()" *ngIf="appcomponent.isProfileCreated == 0 || user.userLevel == 1">Profil létrehozás !</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationRequestComponent()" *ngIf="user.userLevel == 1">Felírás !</button>
+    <!-- button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationDispenseComponent()">Kiváltás !</button -->
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationAdministrationComponent()">Adminisztrálás !</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationRequestBundleComponent()">{{this.user.userLevel == 1 ? 'Receptek' : 'Receptjeim'}}</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationDispenseBundleComponent()">Kiváltott{{this.user.userLevel == 1 ? ' receptek' : ' receptjeim' }}</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationAdministrationBundleComponent()">Adminisztráció{{this.user.userLevel == 1 ? 'k' : 'im'}}</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPatientComponent()" *ngIf="user.userLevel == 1">Páciensek</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetPractitionerComponent()" *ngIf="user.userLevel == 1">Orvosok</button>
+  </mat-toolbar-row>
 </mat-toolbar>

@@ -1,3 +1,11 @@
+<h2>{{this.appcomponent.userLevel == 1 ? 'Adminisztrációk' : 'Adminisztrációim'}}</h2>
+
+<mat-card *ngIf="this.total == 0">
+  <mat-card-header>
+    <mat-card-title>{{this.appcomponent.userLevel == 1 ? 'Jelenleg nincsenek adminisztrációk' : 'Önnek nincs mentett adminisztrációja.'}}</mat-card-title>
+  </mat-card-header>
+</mat-card>
+
 <div *ngFor="let medicationAdministration of this.medicationAdministrationArray">
   <mat-card>
     <mat-card-header>
@@ -16,3 +24,4 @@
     </mat-card-content>
   </mat-card>
   <br>
+</div>

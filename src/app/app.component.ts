@@ -5,6 +5,7 @@ import {Component, OnInit} from '@angular/core';
 import { RestApiService } from './shared/services/rest-api/rest-api.service';
 import { Patient } from './models/patient.model';
 import { Router } from '@angular/router';
+import {SnackbarComponent} from './components/snackbar-component/snackbar.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
   isProfileCreated: any;
   postPatientData: Patient; // TODO
 
-  constructor(public auth: GoogleAuthService, public api: RestApiService, public router: Router) {
+  constructor(public auth: GoogleAuthService, public api: RestApiService, public router: Router, public snackBar: SnackbarComponent) {
     this.subscribeToUserDatas();
     this.checkIfProfilCreated();
   }

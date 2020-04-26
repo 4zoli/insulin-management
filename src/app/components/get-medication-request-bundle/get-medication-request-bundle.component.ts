@@ -3,6 +3,8 @@ import { AppComponent} from '../../app.component';
 import {MedicationRequest} from '../../models/medication.request.model';
 import {FormGroup} from '@angular/forms';
 import {MedicationDispense} from '../../models/medication.dispense.model';
+import {PostMedicationDispenseComponent} from '../post-medication-dispense/post-medication-dispense.component';
+import {PostMedicationAdministrationComponent} from '../post-medication-administration/post-medication-administration.component';
 
 @Component({
   selector: 'app-get-medication-request-bundle',
@@ -11,73 +13,19 @@ import {MedicationDispense} from '../../models/medication.dispense.model';
 })
 
 export class GetMedicationRequestBundleComponent implements OnInit {
+  dispenseModel: any = this.postDispense.dispenseModel;
+  administrationModel: any = this.postAdministration.administrationModel
   medicationRequestArray: MedicationRequest[] = [];
   public updateRequestData: any = {};
-  constructor(public appcomponent: AppComponent) { }
+  private total: number;
 
-  dispenseModel = {
-    resourceType: 'MedicationDispense',
-    id: '1',
-    status: 'completed',
-    medicationCodeableConcept: {
-      coding: [
-        {
-          display: 'Lantus 100 unit/ml injectable solution'
-        }
-      ]
-    },
-    subject: {
-      reference: 'Patient/1',
-      display: 'Vezetéknév Keresztnév'
-    },
-    performer: [
-      {
-        actor: {
-          reference: 'Practitioner/1',
-        },
-        onBehalfOf: {
-          reference: 'Organization/1'
-        }
-      }
-    ],
-    authorizingPrescription: [
-      {
-        reference: 'MedicationRequest/1'
-      }
-    ],
-    quantity: {
-      value: 10,
-      code: 'ml'
-    },
-    daysSupply: {
-      value: 30,
-      unit: 'Day',
-      code: 'd'
-    },
-    whenPrepared: '2020-04-19T07:13:00+05:00',
-    dosageInstruction: [
-      {
-        sequence: 1,
-        text: '20 Units SC three times daily',
-        timing: {
-          repeat: {
-            frequency: 3,
-            period: 1,
-            periodUnit: 'd'
-          }
-        },
-        doseQuantity: {
-          value: 20,
-          unit: 'U',
-          code: 'U'
-        }
-      }
-    ],
-    meta: {
-      versionId: '1',
-      lastUpdated: '2020-04-15T21:50:48Z'
-    }
-  };
+  constructor(
+    public appcomponent: AppComponent,
+    public postDispense: PostMedicationDispenseComponent,
+    public postAdministration: PostMedicationAdministrationComponent
+  ) {}
+
+
 
   requestModel = {
     resourceType: 'MedicationRequest',
@@ -117,7 +65,7 @@ export class GetMedicationRequestBundleComponent implements OnInit {
     }
 
   getMedicationRequestBundle(queryParams: any) {
-    // this.medicationRequestsArray.length = 0;
+    this.medicationRequestArray.length = 0;
     this.appcomponent.api.getMedicationRequestBundle(queryParams)
       .subscribe(response => {
         console.log(response);
@@ -127,6 +75,11 @@ export class GetMedicationRequestBundleComponent implements OnInit {
         );
         // @ts-ignore
         this.medicationRequestArray = response.body.entry;
+        // @ts-ignore
+        this.total = response.body.total;
+        // @ts-ignore
+        // tslint:disable-next-line:max-line-length
+        response.body.total > 0 ? this.appcomponent.snackBar.successMesage('Receptek száma:  ' + this.medicationRequestArray.length) : this.appcomponent.snackBar.successMesage('Jelengleg nem találhatóak receptek !');
       });
   }
 
@@ -147,6 +100,7 @@ export class GetMedicationRequestBundleComponent implements OnInit {
       this.getMedicationRequestBundle('?patient=' + this.appcomponent.userEmail);
   }
 
+  /*
   postMedicationDispense(medicationDispenseData: MedicationDispense) {
     this.appcomponent.api
       .postMedicationDispense(medicationDispenseData)
@@ -154,6 +108,7 @@ export class GetMedicationRequestBundleComponent implements OnInit {
         return this.appcomponent.arrayForAnyResponse.push(response);
       });
   }
+  */
 
   updateMedicationRequest(id: any, medicationRequest: MedicationRequest) {
     this.appcomponent.api
@@ -177,7 +132,7 @@ export class GetMedicationRequestBundleComponent implements OnInit {
     this.dispenseModel.dosageInstruction[0].text = 'Napi háromszor 20 egység.';
     this.dispenseModel.meta.lastUpdated = new Date().toString();
     // @ts-ignore
-    this.postMedicationDispense(this.dispenseModel);
+    this.postDispense.postMedicationDispense(this.dispenseModel);
 
     // PUT For update the dispensed prescription.
     // @ts-ignore

@@ -1,13 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100%; background-color: wheat}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.login-wrapper .example-form{min-width:100%;max-width:300px;width:100%; text-align: center}
-.login-wrapper .example-full-width,.login-wrapper .btn-block{width:100%;}
-.login-wrapper mat-card-header{text-align:center;width:100%;display:block;font-weight:700;color: rebeccapurple;}
-.login-wrapper mat-card-header mat-card-title{font-size:30px}
-.login-wrapper .mat-card{padding:40px 70px 50px;}
-.login-wrapper .mat-stroked-button{border:1px solid currentColor;line-height:54px;background:#FFF7FA;}
-.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
-.login-wrapper mat-card{background-color: ghostwhite}
+.wrapper .form{min-width:100%;max-width:300px;width:100%; text-align: center;}
+.wrapper .full-width,.wrapper .btn-block{width:100%;}
+.wrapper mat-card-header{text-align:center;width:100%;display:block;font-weight:700;color: rebeccapurple;}
+.wrapper mat-card-header mat-card-title{font-size:30px}
+.wrapper .mat-card{padding:40px 70px 50px; }
+.wrapper .mat-stroked-button{border:1px solid currentColor;line-height:54px;background:#FFF7FA;}
+.wrapper .mat-form-field-appearance-legacy .mat-form-field-infix{padding:0.8375em 0;}
+.wrapper mat-card{background-color: ghostwhite;}
+
+.mat-toolbar-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+.divItems {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Times New Roman"
+}

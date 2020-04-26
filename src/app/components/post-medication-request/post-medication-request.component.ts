@@ -127,7 +127,7 @@ export class PostMedicationRequestComponent implements OnInit {
       type: 'input',
       templateOptions: {
         label: 'Felírás dátuma',
-        placeholder: '2017-01-27T15:32:06+01:00',
+        placeholder: new Date().toString(),
         required: true,
         disabled: true
       }
@@ -137,7 +137,7 @@ export class PostMedicationRequestComponent implements OnInit {
       type: 'input',
       templateOptions: {
         label: 'Utolsó módosítás időpontja',
-        placeholder: '2020-04-15T21:50:48Z',
+        placeholder: new Date().toString(),
         disabled: true,
         required: true
       }
@@ -149,6 +149,7 @@ export class PostMedicationRequestComponent implements OnInit {
     this.appcomponent.api
       .postMedicationRequest(medicationRequestData)
       .subscribe(response => {
+        this.appcomponent.snackBar.successMesage('Sikeres felírás!')
         return this.appcomponent.arrayForAnyResponse.push(response);
       });
   }
