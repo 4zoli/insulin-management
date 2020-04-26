@@ -10,6 +10,7 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
   styleUrls: ['./post-medication-dispense.component.css']
 })
 export class PostMedicationDispenseComponent implements OnInit {
+  // tslint:disable-next-line:max-line-length
   constructor(public appcomponent: AppComponent) {
   }
 

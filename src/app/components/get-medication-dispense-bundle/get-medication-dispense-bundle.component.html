@@ -7,12 +7,13 @@
     <mat-card-content>
       <table>
         <tr><td>Azonosító: </td><td>{{medicationDispense.resource.id}}</td></tr>
+        <tr><td>Recept azonosító: </td><td>{{medicationDispense.resource.authorizingPrescription[0].reference}}</td></tr>
         <tr><td>Páciens azonosító: </td><td>{{medicationDispense.resource.subject.reference}}</td></tr>
         <tr><td>Felíró orvos: </td><td>{{medicationDispense.resource.performer[0].actor.reference}}</td></tr>
         <tr><td>Mennyiség: </td><td>{{medicationDispense.resource.quantity.value + ' ' + medicationDispense.resource.quantity.code}}</td></tr>
         <tr><td>Elegendő idő: </td><td>{{medicationDispense.resource.daysSupply.value + ' ' + medicationDispense.resource.daysSupply.unit}}</td></tr>
         <tr><td>Adagolás: </td><td>{{medicationDispense.resource.dosageInstruction[0].text}}</td></tr>
-        <tr><td>Készítve: </td><td>{{medicationDispense.resource.whenPrepared}}</td></tr>
+        <tr><td>Recept felírásának ideje: </td><td>{{medicationDispense.resource.whenPrepared}}</td></tr>
         <tr><td>Kiváltott recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationDispense(medicationDispense.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>

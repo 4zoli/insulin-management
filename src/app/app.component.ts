@@ -55,14 +55,5 @@ export class AppComponent implements OnInit {
     });
   }
 
-// TODO
-  updatePatient(id: any) {
-    this.api
-      .updatePatient(id, this.postPatientData)
-      .subscribe(response => {
-        return this.arrayForAnyResponse.push(response);
-      });
-  }
-
   ngOnInit(): void {}
 }
