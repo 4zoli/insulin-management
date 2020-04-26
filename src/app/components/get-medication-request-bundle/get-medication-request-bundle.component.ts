@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent} from '../../app.component';
 import {MedicationRequest} from '../../models/medication.request.model';
-import {FormGroup} from '@angular/forms';
-import {MedicationDispense} from '../../models/medication.dispense.model';
-import {PostMedicationDispenseComponent} from '../post-medication-dispense/post-medication-dispense.component';
-import {PostMedicationAdministrationComponent} from '../post-medication-administration/post-medication-administration.component';
+import {PostPutMedicationDispenseComponent} from '../post-medication-dispense/post-put-medication-dispense.component';
 
 @Component({
   selector: 'app-get-medication-request-bundle',
@@ -14,20 +11,17 @@ import {PostMedicationAdministrationComponent} from '../post-medication-administ
 
 export class GetMedicationRequestBundleComponent implements OnInit {
   dispenseModel: any = this.postDispense.dispenseModel;
-  administrationModel: any = this.postAdministration.administrationModel
   medicationRequestArray: MedicationRequest[] = [];
-  public updateRequestData: any = {};
-  private total: number;
+  public total: number;
 
   constructor(
     public appcomponent: AppComponent,
-    public postDispense: PostMedicationDispenseComponent,
-    public postAdministration: PostMedicationAdministrationComponent
+    public postDispense: PostPutMedicationDispenseComponent
   ) {}
 
 
 
-  requestModel = {
+  medicationRequestModel = {
     resourceType: 'MedicationRequest',
     id: '1',
     status: 'active',
@@ -100,21 +94,10 @@ export class GetMedicationRequestBundleComponent implements OnInit {
       this.getMedicationRequestBundle('?patient=' + this.appcomponent.userEmail);
   }
 
-  /*
-  postMedicationDispense(medicationDispenseData: MedicationDispense) {
-    this.appcomponent.api
-      .postMedicationDispense(medicationDispenseData)
-      .subscribe(response => {
-        return this.appcomponent.arrayForAnyResponse.push(response);
-      });
-  }
-  */
-
   updateMedicationRequest(id: any, medicationRequest: MedicationRequest) {
     this.appcomponent.api
       .updateMedicationRequest(id, medicationRequest)
       .subscribe(response => {
-        console.log('return ');
         console.log(response);
         return this.appcomponent.arrayForAnyResponse.push(response);
       });
@@ -131,15 +114,13 @@ export class GetMedicationRequestBundleComponent implements OnInit {
     this.dispenseModel.whenPrepared = medicationRequest.resource.authoredOn;
     this.dispenseModel.dosageInstruction[0].text = 'Napi háromszor 20 egység.';
     this.dispenseModel.meta.lastUpdated = new Date().toString();
-    // @ts-ignore
+    this.dispenseModel.status = 'in-progress';
     this.postDispense.postMedicationDispense(this.dispenseModel);
-
-    // PUT For update the dispensed prescription.
     // @ts-ignore
-    this.requestModel = medicationRequest.resource;
-    this.requestModel.meta.lastUpdated = new Date();
-    this.requestModel.status = 'completed';
+    this.medicationRequestModel = medicationRequest.resource;
+    this.medicationRequestModel.meta.lastUpdated = new Date();
+    this.medicationRequestModel.status = 'completed';
     // @ts-ignore
-    this.updateMedicationRequest(medicationRequest.resource.id, this.requestModel);
+    this.updateMedicationRequest(medicationRequest.resource.id, this.medicationRequestModel);
   }
 }

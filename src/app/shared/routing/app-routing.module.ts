@@ -11,7 +11,7 @@ import {LoginComponent} from '../../components/login/login.component';
 
 /** Components - Functions - POST */
 import {PostMedicationAdministrationComponent} from '../../components/post-medication-administration/post-medication-administration.component';
-import {PostMedicationDispenseComponent} from "../../components/post-medication-dispense/post-medication-dispense.component";
+import {PostPutMedicationDispenseComponent} from "../../components/post-medication-dispense/post-put-medication-dispense.component";
 import {PostPatientComponent} from "../../components/post-patient/post-patient.component";
 import {PostMedicationRequestComponent} from "../../components/post-medication-request/post-medication-request.component";
 /** Components - Functions - GET */
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'app-root', component: AppComponent},
 
   { path: 'post-medication-administration', component: PostMedicationAdministrationComponent, canActivate: [AuthGuard] },
-  { path: 'post-medication-dispense', component: PostMedicationDispenseComponent, canActivate: [AuthGuard]},
+  { path: 'post-medication-dispense', component: PostPutMedicationDispenseComponent, canActivate: [AuthGuard]},
   { path: 'post-medication-request', component: PostMedicationRequestComponent, canActivate: [AuthGuard]},
   { path: 'post-patient', component: PostPatientComponent, canActivate: [AuthGuard]},
 

@@ -4,6 +4,7 @@ export interface MedicationDispense {
 export interface Resource {
   resourceType: string;
   id: string;
+  extension: Extension[];
   text: Text;
   status: string;
   medicationCodeableConcept: RouteOrMedicationCodeableConceptOrType;
@@ -16,6 +17,10 @@ export interface Resource {
   whenPrepared: string;
   dosageInstruction?: (DosageInstructionEntity)[] | null;
   meta: Meta;
+}
+interface Extension {
+  url: string;
+  value: string;
 }
 export interface Text {
   status: string;

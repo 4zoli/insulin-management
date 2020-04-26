@@ -11,15 +11,16 @@
     <mat-card-header>
       <mat-card-title>{{medicationRequest.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>
       <mat-card-subtitle>Azonosító: {{medicationRequest.resource.id}}</mat-card-subtitle>
+      <mat-card-subtitle>Státusz: {{medicationRequest.resource.status == 'completed' ? 'Kiváltott' : 'Aktív'}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <table>
-        <tr><td>Státusz: </td><td>{{medicationRequest.resource.status == 'completed' ? 'Kiváltott' : 'Aktív'}}</td></tr>
+
         <tr><td>Jogosult: </td><td>{{medicationRequest.resource.subject.reference}}</td></tr>
         <tr><td>Felírás dátuma: </td><td>{{medicationRequest.resource.authoredOn}}</td></tr>
         <tr><td>Felíró: </td><td>{{medicationRequest.resource.requester.agent.reference}}</td></tr>
         <tr><td>Utolsó frissítés: </td><td>{{medicationRequest.resource.meta.lastUpdated}}</td></tr>
-        <tr *ngIf="medicationRequest.resource.status != 'completed'"><td>Recept kiváltása: </td><td><button mat-button color="accent" (click)="this.makePrescriptionDispense(medicationRequest)">Kiváltás!</button></td></tr>
+        <tr *ngIf="medicationRequest.resource.status != ('completed')"><td>Recept kiváltása: </td><td><button mat-button color="accent" (click)="this.makePrescriptionDispense(medicationRequest)">Kiváltás!</button></td></tr>
         <tr *ngIf="this.appcomponent.userLevel == 1"><td>Recept törlése:  </td><td><button mat-button color="accent" (click)="this.deleteMedicationRequest(medicationRequest.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>

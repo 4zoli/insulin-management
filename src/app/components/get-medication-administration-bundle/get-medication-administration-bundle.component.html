@@ -9,7 +9,7 @@
 <div *ngFor="let medicationAdministration of this.medicationAdministrationArray">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{medicationAdministration.resource.subject.display + ' - ' + medicationAdministration.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>
+      <mat-card-title>{{this.appcomponent.userLevel == 1 ? medicationAdministration.resource.subject.display + '-' : ''}}{{medicationAdministration.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title>
       <mat-card-subtitle>{{'Azonosító: ' + medicationAdministration.resource.id}}</mat-card-subtitle>
       <mat-card-subtitle>{{'Státusz: ' + medicationAdministration.resource.status}}</mat-card-subtitle>
     </mat-card-header>
@@ -17,9 +17,10 @@
       <table>
         <tr><td>Időpont: </td><td>{{medicationAdministration.resource.effectivePeriod.end}}</td></tr>
         <tr><td>Kapcsolódó recept azonosító: </td><td>{{medicationAdministration.resource.prescription.reference}}</td></tr>
-        <tr><td>Felhasznált mennyiség: </td><td>{{medicationAdministration.resource.dosage.text}}</td></tr>
-        <tr><td>Utolsó frissítés: </td><td>{{medicationAdministration.resource.meta.lastUpdated}}</td></tr>
-        <tr><td>Recept törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationAdministration(medicationAdministration.resource.id)">Törlöm!</button></td></tr>
+        <tr><td>Adagolási javaslat: </td><td>{{medicationAdministration.resource.dosage.text}}</td></tr>
+        <tr><td>Felhasznált mennyiség: </td><td>{{medicationAdministration.resource.dosage.dose.value + ' egység.'}}</td></tr>
+        <tr><td>Adminisztrálás időpontja: </td><td>{{medicationAdministration.resource.meta.lastUpdated}}</td></tr>
+        <tr *ngIf="this.appcomponent.userLevel == 1"><td>Adminisztráció törlése:  </td><td><button mat-button color="primary" (click)="this.deleteMedicationAdministration(medicationAdministration.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>
   </mat-card>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
 import {AppComponent} from '../../app.component';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -9,21 +10,10 @@ import {AppComponent} from '../../app.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public auth: GoogleAuthService, public appcomponent: AppComponent) {
-  }
+  constructor(public auth: GoogleAuthService, public appcomponent: AppComponent) {}
 
   ngOnInit(): void {
 
-  }
-
-  showPostMedicationAdministrationComponent() {
-    this.appcomponent.router.navigateByUrl('post-medication-administration').then();
-    console.log('post-medication-administration');
-  }
-
-  showPostMedicationDispenseComponent() {
-    this.appcomponent.router.navigateByUrl('post-medication-dispense').then();
-    console.log('post-medication-dispense');
   }
 
   showPostPatientComponent() {

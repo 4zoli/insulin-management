@@ -10,6 +10,7 @@
         <tr><td>Cím: </td><td>{{practitioner.resource.address[0].country + " " + practitioner.resource.address[0].postalCode + " " + practitioner.resource.address[0].state + " " + practitioner.resource.address[0].city}}</td></tr>
         <tr><td>Nem: </td><td>{{practitioner.resource.gender}}</td></tr>
         <tr><td>Jelenleg aktívan dolgozik: </td><td>{{practitioner.resource.active ? 'Igen' : 'Nem'}}</td></tr>
+        <tr><td>Orvos törlése:</td><td><button mat-button color="primary" (click)="this.deletePractitioner(practitioner.resource.id)">Törlöm!</button></td></tr>
       </table>
     </mat-card-content>
   </mat-card>

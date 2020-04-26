@@ -21,11 +21,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .fill-space {
   flex: 1 1 auto;
 }
-
-.divItems {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Times New Roman"
-}

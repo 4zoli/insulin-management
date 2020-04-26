@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+/* tslint:disable */
+import { Component } from '@angular/core';
 import { AppComponent} from '../../app.component';
 import { Patient} from '../../models/patient.model';
 
@@ -7,16 +8,11 @@ import { Patient} from '../../models/patient.model';
   templateUrl: './get-patient-bundle.component.html',
   styleUrls: ['./get-patient-bundle.component.css']
 })
-export class GetPatientBundleComponent implements OnInit {
+export class GetPatientBundleComponent {
   patientArray: Patient[] = [];
-  constructor(public appcomponent: AppComponent) {
-    this.getPatientBundle('');
-  }
-
-  ngOnInit(): void {}
+  constructor(public appcomponent: AppComponent) { this.getPatientBundle(''); }
 
   getPatientBundle(queryParams) {
-    // @ts-ignore
     this.appcomponent.api.getPatientBundle(queryParams)
       .subscribe(response => {
         console.log(response);
@@ -30,7 +26,6 @@ export class GetPatientBundleComponent implements OnInit {
           this.patientArray = response.body.entry;
         }
         // @ts-ignore
-        // tslint:disable-next-line:max-line-length
         response.body.total > 0 ? this.appcomponent.snackBar.successMesage(this.patientArray.length + ' regisztrált felhasználó található az adatbázisban!') : this.appcomponent.snackBar.successMesage('Nincsenek regisztrált felhasználók!');
         console.log(this.patientArray);
       });

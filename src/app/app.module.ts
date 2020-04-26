@@ -33,7 +33,7 @@ import {PostMedicationAdministrationComponent} from './components/post-medicatio
 /** Components - Functions - DELETE */
 import { GetPractitionerBundleComponent } from './components/get-practitioner-bundle/get-practitioner-bundle.component';
 import { PostPatientComponent } from './components/post-patient/post-patient.component';
-import { PostMedicationDispenseComponent } from './components/post-medication-dispense/post-medication-dispense.component';
+import { PostPutMedicationDispenseComponent } from './components/post-medication-dispense/post-put-medication-dispense.component';
 import { PostMedicationRequestComponent } from './components/post-medication-request/post-medication-request.component';
 import {MatCardModule} from "@angular/material/card";
 import { SnackbarComponent } from './components/snackbar-component/snackbar.component';
@@ -97,12 +97,18 @@ export function DateValidatorMessage(err, field: FormlyFieldConfig) {
     HeaderComponent,
     GetPractitionerBundleComponent,
     PostPatientComponent,
-    PostMedicationDispenseComponent,
+    PostPutMedicationDispenseComponent,
     PostMedicationRequestComponent,
     SnackbarComponent
   ],
   bootstrap: [AppComponent],
-  providers: [AuthGuard, SnackbarComponent,PostMedicationDispenseComponent,PostMedicationAdministrationComponent]
+  providers: [
+    AuthGuard,
+    SnackbarComponent,
+    PostPutMedicationDispenseComponent,
+    PostMedicationAdministrationComponent,
+    GetPatientBundleComponent
+  ]
 })
 
 export class AppModule { }

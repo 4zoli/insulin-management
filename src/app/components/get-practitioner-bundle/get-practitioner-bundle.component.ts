@@ -33,4 +33,14 @@ export class GetPractitionerBundleComponent implements OnInit {
       });
   }
 
+  deletePractitioner(id: any) {
+    this.appcomponent.api
+      .deletePractitioner(id)
+      .subscribe(response => {
+        return this.appcomponent.arrayForAnyResponse.push(response);
+      });
+    this.practitionerArray.length = 0;
+    this.getPractitionerBundle();
+  }
+
 }

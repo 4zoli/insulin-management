@@ -9,8 +9,9 @@ import {MedicationAdministration} from '../../models/medication.administration.m
 })
 export class GetMedicationAdministrationBundleComponent implements OnInit {
   queryParams: string;
+  tmp: any;
   medicationAdministrationArray: MedicationAdministration[] = [];
-  private total: number;
+  public total: number;
   constructor(public appcomponent: AppComponent) {
     console.log(this.appcomponent.userLevel == 1 ? 'Admin' : 'Felhasznalo');
     this.appcomponent.userLevel == 1 ? this.queryParams = '' : this.queryParams = '?patient=' + this.appcomponent.userEmail;
@@ -39,12 +40,12 @@ export class GetMedicationAdministrationBundleComponent implements OnInit {
   }
 
   deleteMedicationAdministration(id: any) {
+    this.medicationAdministrationArray.length = 0;
     this.appcomponent.api
       .deleteMedicationAdministration(id)
       .subscribe(response => {
         return this.appcomponent.arrayForAnyResponse.push(response);
       });
-    this.medicationAdministrationArray.length = 0;
     this.getMedicationAdministrationBundle(this.queryParams);
   }
 }
