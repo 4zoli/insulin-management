@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {AppComponent} from '../../app.component';
 import {FormlyFieldConfig} from '@ngx-formly/core';
@@ -9,7 +9,7 @@ import {Patient} from '../../models/patient.model';
   templateUrl: './post-patient.component.html',
   styleUrls: ['./post-patient.component.css']
 })
-export class PostPatientComponent implements OnInit {
+export class PostPatientComponent {
   constructor(public appcomponent: AppComponent) {
   }
   form = new FormGroup({});
@@ -227,18 +227,6 @@ fields: FormlyFieldConfig[] = [
     templateOptions: {
       label: 'Kapcsolati státusza',
       options: [
-        /*
-        A	Annulled	Marriage contract has been declared null and to not have existed
-        D	Divorced	Marriage contract has been declared dissolved and inactive
-        I	Interlocutory	Subject to an Interlocutory Decree.
-        L	Legally Separated	Legally Separated
-        M	Married	A current marriage contract is active
-        P	Polygamous	More than 1 current spouse
-        S	Never Married	No marriage contract has ever been entered
-        T	Domestic partner	Person declares that a domestic partner relationship exists.
-        U	unmarried	Currently not in a marriage contract.
-        W	Widowed	The spouse has died
-        */
         {value: 'M', label: 'Házas'},
         {value: 'D', label: 'Elvált'},
         {value: 'W', label: 'Özvegy'},
@@ -262,10 +250,7 @@ onSubmit() {
     this.postPatient(this.model);
     console.log(this.appcomponent.arrayForAnyResponse);
     this.appcomponent.router.navigateByUrl('/app-root', { skipLocationChange: true }).then(() => {
-      this.appcomponent.router.navigate(['post-medication-administration']);
+      this.appcomponent.router.navigate(['get-medication-request-bundle']);
   });
-}
-ngOnInit() {
-
 }
 }
