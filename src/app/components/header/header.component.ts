@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
 import {AppComponent} from '../../app.component';
 
@@ -8,13 +8,9 @@ import {AppComponent} from '../../app.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(public auth: GoogleAuthService, public appcomponent: AppComponent) {}
-
-  ngOnInit(): void {
-
-  }
 
   showPostPatientComponent() {
     this.appcomponent.router.navigateByUrl('post-patient').then();

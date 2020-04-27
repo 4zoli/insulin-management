@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {GoogleAuthService} from '../../shared/services/google-auth/google-auth.service';
 import {AppComponent} from '../../app.component';
 
@@ -7,15 +7,9 @@ import {AppComponent} from '../../app.component';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent {
 
   constructor(public auth: GoogleAuthService, public appcomponent: AppComponent) {
     this.appcomponent.snackBar.successMesage('Üdvözöllek az oldalon!');
   }
-
-
-  ngOnInit(): void {}
-
-
-
 }

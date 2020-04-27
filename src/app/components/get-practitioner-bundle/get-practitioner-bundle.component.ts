@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Practitioner } from '../../models/practitioner.model';
 import {AppComponent} from '../../app.component';
 
@@ -7,13 +7,11 @@ import {AppComponent} from '../../app.component';
   templateUrl: './get-practitioner-bundle.component.html',
   styleUrls: ['./get-practitioner-bundle.component.css']
 })
-export class GetPractitionerBundleComponent implements OnInit {
+export class GetPractitionerBundleComponent {
   practitionerArray: Practitioner[] = [];
   constructor(public appcomponent: AppComponent) {
     this.getPractitionerBundle();
   }
-
-  ngOnInit(): void {}
 
   getPractitionerBundle() {
     // @ts-ignore
