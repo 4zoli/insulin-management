@@ -6,7 +6,7 @@
     <button mat-stroked-button color="accent" class="btn-block"  class="button" (click)="auth.signOut()">Kijelentkeztés</button>
   </mat-toolbar-row>
   <mat-toolbar-row>
-    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostPatientComponent()" *ngIf="appcomponent.isProfileCreated == 0 || user.userLevel == 1">Profil létrehozás !</button>
+    <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostPatientComponent()" *ngIf="appcomponent.isProfileCreated == 0 ">Profil létrehozás !</button>
     <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showPostMedicationRequestComponent()" *ngIf="user.userLevel == 1">Felírás !</button>
     <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationRequestBundleComponent()" *ngIf="appcomponent.isProfileCreated == 1" >{{this.user.userLevel == 1 ? 'Receptek' : 'Receptjeim'}}</button>
     <button mat-stroked-button color="accent" class="btn-block" class="button" (click)="this.showGetMedicationDispenseBundleComponent()" *ngIf="appcomponent.isProfileCreated == 1" >Kiváltott{{this.user.userLevel == 1 ? ' receptek' : ' receptjeim' }}</button>

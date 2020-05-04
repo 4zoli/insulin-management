@@ -1,9 +1,8 @@
 
 /** Needed Libs */
 import { GoogleAuthService } from './shared/services/google-auth/google-auth.service';
-import {Component, OnInit} from '@angular/core';
+import {Component } from '@angular/core';
 import { RestApiService } from './shared/services/rest-api/rest-api.service';
-import { Patient } from './models/patient.model';
 import { Router } from '@angular/router';
 import {SnackbarComponent} from './components/snackbar-component/snackbar.component';
 
@@ -14,14 +13,12 @@ import {SnackbarComponent} from './components/snackbar-component/snackbar.compon
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   arrayForAnyResponse: any = [];
-  arrayForCheckProfil: any = [];
   userEmail: any;
   userName: any[];
   userLevel: any;
   isProfileCreated: any;
-  postPatientData: Patient; // TODO
 
   constructor(public auth: GoogleAuthService, public api: RestApiService, public router: Router, public snackBar: SnackbarComponent) {
     this.subscribeToUserDatas();
@@ -45,16 +42,12 @@ export class AppComponent implements OnInit {
     console.log('checkIfProfilCreated');
     this.auth.user$.subscribe( user => {
       this.api.getPatientBundle('?identifier=' + user.email).subscribe(response => {
-        // this.arrayForCheckProfil.push(response);
         console.log('appcomponent await getBundle');
         // @ts-ignore
         console.log(response.body.total);
-        // this.isProfileCreated = this.arrayForCheckProfil[0].body.total;
         // @ts-ignore
         this.isProfileCreated = response.body.total;
       });
     });
   }
-
-  ngOnInit(): void {}
 }
