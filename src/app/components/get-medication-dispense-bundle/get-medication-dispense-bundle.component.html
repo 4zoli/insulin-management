@@ -10,7 +10,7 @@
   <table fxFlex="50%">
     <td>
       <tr><mat-card-title>{{medicationDispense.resource.subject.display + ' - ' + medicationDispense.resource.medicationCodeableConcept.coding[0].display}}</mat-card-title></tr>
-      <tr><mat-card-subtitle>{{'Státusz: ' + medicationDispense.resource.status}}</mat-card-subtitle></tr>
+      <tr><mat-card-subtitle>{{'Státusz: ' + (medicationDispense.resource.status === 'completed' ? 'Befejezett' : medicationDispense.resource.status) }}</mat-card-subtitle></tr>
       <tr *ngIf="this.appcomponent.userLevel == 1"><td>Kiváltott recept törlése:</td></tr>
       <tr *ngIf="this.appcomponent.userLevel == 1"><td><button mat-button color="primary" (click)="this.deleteMedicationDispense(medicationDispense.resource.id)">Törlöm!</button></td></tr>
     </td>
